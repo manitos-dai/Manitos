@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MANITOS Profesional</title>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+
+<style>
+body{margin:0;font-family:'Segoe UI';background:#fdf6f9;color:#444;}
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.hero img{max-width:320px;margin-bottom:20px;}
+.hero button{padding:15px 25px;background:#ff9bb3;border:none;border-radius:12px;color:white;cursor:pointer;}
+.menu{display:none;text-align:center;padding:20px;}
+.menu button{margin:10px;padding:10px 20px;border:none;border-radius:10px;background:#ffd6e0;cursor:pointer;}
+.section{display:none;padding:20px;max-width:900px;margin:auto;}
+.card{background:#fff;padding:20px;border-radius:15px;margin:10px 0;box-shadow:0 4px 10px rgba(0,0,0,0.1);}
+.admin{display:none;background:#fff;padding:20px;border-radius:15px;margin:20px;}
+input{padding:8px;margin:5px;width:100%;}
+</style>
+</head>
+<body>
+
+<div class="hero" id="hero">
+<img src="https://i.imgur.com/yourimage.png">
+<h2>Consultorio Psicopedagógico</h2>
+<p>Lic. Daiana Carberol</p>
+<button onclick="mostrarMenu()">Ingresar</button>
+</div>
+
+<div class="menu" id="menu">
+<button onclick="mostrar('tienda')">Productos</button>
+<button onclick="mostrar('turnos')">Turnos</button>
+<button onclick="mostrar('info')">Información</button>
+<button onclick="mostrar('contacto')">Contacto</button>
+<button onclick="loginAdmin()">Admin</button>
+</div>
+
+<div class="section" id="tienda">
+<h2>Productos</h2>
+<div id="productos"></div>
+</div>
+
+<div class="section" id="turnos">
+<h2>Turnos</h2>
+<p>Solicitar sesiones de psicopedagogía y pruebas cognitivas</p>
+<p>WhatsApp: 1134236917</p>
+</div>
+
+<div class="section" id="info">
+<h2>Información</h2>
+<p>Dirección: Pilar Point, Consultorio 6</p>
+</div>
+
+<div class="section" id="contacto">
+<h2>Contacto</h2>
+<p>Instagram: @manitos.pilar</p>
+</div>
+
+<div class="admin" id="admin">
+<h2>Backoffice</h2>
+<input id="nombre" placeholder="Producto">
+<input id="precio" placeholder="Precio">
+<input id="link" placeholder="Link PDF">
+<button onclick="agregarProducto()">Guardar</button>
+</div>
+
+<script>
+
+// 🔴 CONFIGURAR FIREBASE (REEMPLAZAR)
+const firebaseConfig = {
+apiKey: "TU_API_KEY",
+authDomain: "TU_DOMINIO",
+projectId: "TU_PROJECT_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+function mostrarMenu(){
+document.getElementById('hero').style.display='none';
+document.getElementById('menu').style.display='block';
+}
+
+function mostrar(id){
+document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+document.getElementById(id).style.display='block';
+}
+
+function loginAdmin(){
+let pass = prompt("Clave admin:");
+if(pass === "1234"){
+document.getElementById('admin').style.display='block';
+}
+}
+
+function cargarProductos(){
+db.collection("productos").get().then(snapshot=>{
+let cont = document.getElementById("productos");
+cont.innerHTML="";
+snapshot.forEach(doc=>{
+let p = doc.data();
+cont.innerHTML += `<div class='card'>
+<h3>${p.nombre}</h3>
+<p>$${p.precio}</p>
+<button onclick="comprar('${doc.id}')">Comprar</button>
+</div>`;
+});
+});
+}
+
+function agregarProducto(){
+let n=document.getElementById("nombre").value;
+let p=parseInt(document.getElementById("precio").value);
+let l=document.getElementById("link").value;
+
+db.collection("productos").add({nombre:n,precio:p,link:l});
+alert("Producto guardado");
+cargarProductos();
+}
+
+function comprar(id){
+let email = prompt("Ingresá tu email");
+
+// guardar cliente
+ db.collection("clientes").add({email:email,producto:id,fecha:new Date()});
+
+ alert("Simulación de pago completada (MercadoPago se conecta después)");
+
+ // obtener producto y mostrar link
+ db.collection("productos").doc(id).get().then(doc=>{
+   let data = doc.data();
+   alert("Tu descarga: " + data.link);
+ });
+}
+
+cargarProductos();
+
+</script>
+
+</body>
+</html>
