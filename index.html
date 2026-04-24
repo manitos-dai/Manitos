@@ -212,9 +212,15 @@ function mostrar(id){
   document.getElementById(id).style.display='block';
 }
 
-if(window.location.hash === "#admin"){
-  document.getElementById('adminLogin').style.display='flex';
-}
+// DETECCIÓN DE MODO ADMIN (ANTES DE MOSTRAR HERO)
+window.addEventListener('DOMContentLoaded',()=>{
+  if(window.location.hash === "#admin"){
+    document.getElementById('hero').style.display='none';
+    document.getElementById('menu').style.display='none';
+    document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+    document.getElementById('adminLogin').style.display='flex';
+  }
+});
 
 function login(){
   let u=document.getElementById('user').value;
@@ -252,4 +258,3 @@ cargarProductos();
 
 </body>
 </html>
-
