@@ -13,8 +13,21 @@
 body{
   margin:0;
   font-family:'Segoe UI',sans-serif;
-  background: linear-gradient(180deg,#ffffff,#f3f8fb);
-  color:#333;
+  background: url('https://i.imgur.com/PgPo6iZ.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  color:#fff;
+}
+
+/* CAPA OSCURA PARA LEGIBILIDAD */
+body::before{
+  content:"";
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.4);
+  z-index:-1;
 }
 
 /* HERO */
@@ -28,8 +41,7 @@ body{
 }
 
 .hero img{
-  width:350px;
-  mix-blend-mode: multiply;
+  display:none;
 }
 
 .hero h2{
@@ -72,6 +84,7 @@ body{
   font-size:18px;
   text-align:left;
   cursor:pointer;
+  color:#333;
 }
 
 .menu button span{
@@ -83,14 +96,16 @@ body{
   padding:20px;
   max-width:900px;
   margin:auto;
+  color:#fff;
 }
 
 .card{
-  background:#fff;
+  background:rgba(255,255,255,0.9);
   padding:20px;
   border-radius:15px;
   margin:10px 0;
   box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  color:#333;
 }
 
 /* ADMIN LOGIN SECRETO */
@@ -131,25 +146,25 @@ body{
   display:none;
   padding:20px;
 }
-
 </style>
 </head>
+
 <body>
 
 <!-- HERO -->
 <div class="hero" id="hero">
-<img src="https://i.imgur.com/PgPo6iZ.jpeg">
-<h2>Consultorio Psicopedagógico</h2>
-<p>Lic. Daiana Carberol</p>
-<button onclick="mostrarMenu()">INGRESAR</button>
+  <img src="https://i.imgur.com/PgPo6iZ.jpeg">
+  <h2>Consultorio Psicopedagógico</h2>
+  <p>Lic. Daiana Carberol</p>
+  <button onclick="mostrarMenu()">INGRESAR</button>
 </div>
 
 <!-- MENU -->
 <div class="menu" id="menu">
-<button onclick="mostrar('tienda')">📚 Productos <span>›</span></button>
-<button onclick="mostrar('turnos')">📅 Turnos <span>›</span></button>
-<button onclick="mostrar('info')">ℹ️ Información <span>›</span></button>
-<button onclick="mostrar('contacto')">📷 Instagram <span>›</span></button>
+  <button onclick="mostrar('tienda')">📚 Productos <span>›</span></button>
+  <button onclick="mostrar('turnos')">📅 Turnos <span>›</span></button>
+  <button onclick="mostrar('info')">ℹ️ Información <span>›</span></button>
+  <button onclick="mostrar('contacto')">📷 Instagram <span>›</span></button>
 </div>
 
 <!-- SECCIONES -->
@@ -158,7 +173,7 @@ body{
 <div class="section" id="info"><h2>Información</h2><p>Pilar Point, Consultorio 6</p></div>
 <div class="section" id="contacto"><h2>Instagram</h2><p>@manitos.pilar</p></div>
 
-<!-- ADMIN LOGIN (OCULTO POR URL) -->
+<!-- ADMIN LOGIN -->
 <div class="admin-login" id="adminLogin">
   <div class="admin-box">
     <h3>Panel Admin</h3>
@@ -170,26 +185,23 @@ body{
 
 <!-- ADMIN PANEL -->
 <div class="admin-panel" id="adminPanel">
-<h2>Backoffice</h2>
-<input id="nombre" placeholder="Producto">
-<input id="precio" placeholder="Precio">
-<input id="link" placeholder="Link PDF">
-<button onclick="agregarProducto()">Guardar</button>
+  <h2>Backoffice</h2>
+  <input id="nombre" placeholder="Producto">
+  <input id="precio" placeholder="Precio">
+  <input id="link" placeholder="Link PDF">
+  <button onclick="agregarProducto()">Guardar</button>
 </div>
 
 <script>
-
-// 🔴 CONFIG FIREBASE
 const firebaseConfig = {
-apiKey: "TU_API_KEY",
-authDomain: "TU_DOMINIO",
-projectId: "TU_PROJECT_ID"
+  apiKey: "TU_API_KEY",
+  authDomain: "TU_DOMINIO",
+  projectId: "TU_PROJECT_ID"
 };
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-// UI
 function mostrarMenu(){
   document.getElementById('hero').style.display='none';
   document.getElementById('menu').style.display='block';
@@ -200,7 +212,6 @@ function mostrar(id){
   document.getElementById(id).style.display='block';
 }
 
-// ADMIN POR URL SECRETA
 if(window.location.hash === "#admin"){
   document.getElementById('adminLogin').style.display='flex';
 }
@@ -216,7 +227,6 @@ function login(){
   }
 }
 
-// PRODUCTOS
 function cargarProductos(){
   db.collection("productos").get().then(snapshot=>{
     let cont=document.getElementById("productos");
@@ -238,8 +248,8 @@ function agregarProducto(){
 }
 
 cargarProductos();
-
 </script>
 
 </body>
 </html>
+
