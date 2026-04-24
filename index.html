@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MANITOS</title>
-
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
-
-<style>
+<title>MANITOS</title><!-- Firebase --><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script><style>
 body{
   margin:0;
   font-family:'Segoe UI',sans-serif;
@@ -67,6 +60,11 @@ body::before{
 /* MENU */
 .menu{
   display:none;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
   padding:20px;
   text-align:center;
 }
@@ -78,13 +76,21 @@ body::before{
   margin:15px auto;
   padding:18px;
   border:none;
-  border-radius:15px;
-  background:#ffffff;
-  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  border-radius:20px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:0 8px 25px rgba(0,0,0,0.2);
   font-size:18px;
   text-align:left;
   cursor:pointer;
-  color:#333;
+  color:#fff;
+  transition: all 0.3s ease;
+}
+
+.menu button:hover{
+  transform: scale(1.05);
+  background: rgba(255,255,255,0.3);
 }
 
 .menu button span{
@@ -146,53 +152,31 @@ body::before{
   display:none;
   padding:20px;
 }
-</style>
-</head>
-
-<body>
-
-<!-- HERO -->
-<div class="hero" id="hero">
+</style></head><body><!-- HERO --><div class="hero" id="hero">
   <img src="https://i.imgur.com/PgPo6iZ.jpeg">
   <h2>Consultorio Psicopedagógico</h2>
   <p>Lic. Daiana Carberol</p>
   <button onclick="mostrarMenu()">INGRESAR</button>
-</div>
-
-<!-- MENU -->
-<div class="menu" id="menu">
-  <button onclick="mostrar('tienda')">📚 Productos <span>›</span></button>
-  <button onclick="mostrar('turnos')">📅 Turnos <span>›</span></button>
-  <button onclick="mostrar('info')">ℹ️ Información <span>›</span></button>
-  <button onclick="mostrar('contacto')">📷 Instagram <span>›</span></button>
-</div>
-
-<!-- SECCIONES -->
-<div class="section" id="tienda"><h2>Productos</h2><div id="productos"></div></div>
-<div class="section" id="turnos"><h2>Turnos</h2><p>Solicitar sesiones por WhatsApp: 1134236917</p></div>
-<div class="section" id="info"><h2>Información</h2><p>Pilar Point, Consultorio 6</p></div>
-<div class="section" id="contacto"><h2>Instagram</h2><p>@manitos.pilar</p></div>
-
-<!-- ADMIN LOGIN -->
-<div class="admin-login" id="adminLogin">
+</div><!-- MENU --><div class="menu" id="menu">
+  <button onclick="mostrar('tienda')">🛍️ Productos <span>›</span></button>
+  <button onclick="mostrar('turnos')">🧠 Sesiones Psicopedagogía <span>›</span></button>
+  <button onclick="mostrar('info')">👩‍⚕️ Acerca de nosotros <span>›</span></button>
+</div><!-- SECCIONES --><div class="section" id="tienda"><h2>Productos</h2><div id="productos"></div></div>
+<div class="section" id="turnos"><h2>Sesiones Psicopedagogía</h2><p>Solicitar sesiones por WhatsApp: 1134236917</p></div>
+<div class="section" id="info"><h2>Acerca de nosotros</h2><p>Pilar Point, Consultorio 6</p><p>Instagram: @manitos.pilar</p></div><!-- ADMIN LOGIN --><div class="admin-login" id="adminLogin">
   <div class="admin-box">
     <h3>Panel Admin</h3>
     <input id="user" placeholder="Usuario">
     <input id="pass" type="password" placeholder="Contraseña">
     <button onclick="login()">Entrar</button>
   </div>
-</div>
-
-<!-- ADMIN PANEL -->
-<div class="admin-panel" id="adminPanel">
+</div><!-- ADMIN PANEL --><div class="admin-panel" id="adminPanel">
   <h2>Backoffice</h2>
   <input id="nombre" placeholder="Producto">
   <input id="precio" placeholder="Precio">
   <input id="link" placeholder="Link PDF">
   <button onclick="agregarProducto()">Guardar</button>
-</div>
-
-<script>
+</div><script>
 const firebaseConfig = {
   apiKey: "TU_API_KEY",
   authDomain: "TU_DOMINIO",
@@ -239,7 +223,23 @@ function cargarProductos(){
     cont.innerHTML="";
     snapshot.forEach(doc=>{
       let p=doc.data();
-      cont.innerHTML+=`<div class='card'><h3>${p.nombre}</h3><p>$${p.precio}</p></div>`;
+      cont.innerHTML+=`<div class='card'>
+        <h3>${p.nombre}</h3>
+        <p>$${p.precio}</p>
+        <button onclick="eliminarProducto('${doc.id}')" style="margin-top:10px;padding:8px 12px;border:none;border-radius:10px;background:#ff4d4d;color:white;cursor:pointer;">Eliminar</button>
+      </div>`;
+    });
+  });
+}
+
+function eliminarProducto(id){
+  if(confirm("¿Eliminar este producto?")){
+    db.collection("productos").doc(id).delete().then(()=>{
+      alert("Producto eliminado");
+      cargarProductos();
+    });
+  }
+}</h3><p>$${p.precio}</p></div>`;
     });
   });
 }
@@ -254,7 +254,5 @@ function agregarProducto(){
 }
 
 cargarProductos();
-</script>
-
-</body>
+</script></body>
 </html>
