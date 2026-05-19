@@ -1,154 +1,428 @@
 <!DOCTYPE html>
 <html lang="es">
-<!DOCTYPE html><html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MANITOS</title>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+<title>Consultorio Psicopedagógico | Lic. Daiana Carberol</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-<title>MANITOS</title><!-- Firebase --><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script><style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
 body{
-  margin:0;
-  font-family:'Segoe UI',sans-serif;
-@@ -67,6 +60,11 @@
-/* MENU */
-.menu{
-  display:none;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  text-align:center;
-}
-@@ -78,13 +76,21 @@
-  margin:15px auto;
-  padding:18px;
-  border:none;
-  border-radius:15px;
-  background:#ffffff;
-  box-shadow:0 4px 12px rgba(0,0,0,0.1);
-  border-radius:20px;
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow:0 8px 25px rgba(0,0,0,0.2);
-  font-size:18px;
-  text-align:left;
-  cursor:pointer;
-  color:#333;
-  color:#fff;
-  transition: all 0.3s ease;
+font-family:'Poppins',sans-serif;
+overflow-x:hidden;
+background:#f5f5f5;
 }
 
-.menu button:hover{
-  transform: scale(1.05);
-  background: rgba(255,255,255,0.3);
+.hero{
+width:100%;
+height:100vh;
+background:
+linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
+url('https://i.imgur.com/PgPo6iZ.jpeg');
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+position:relative;
 }
 
-.menu button span{
-@@ -146,53 +152,31 @@
-  display:none;
-  padding:20px;
+.hero-content{
+color:white;
+max-width:850px;
+animation:fadeUp 1s ease;
 }
+
+.hero h1{
+font-size:4rem;
+margin-bottom:20px;
+font-weight:700;
+}
+
+.hero p{
+font-size:1.3rem;
+margin-bottom:35px;
+font-weight:300;
+}
+
+.hero-btn{
+padding:18px 36px;
+border:none;
+border-radius:50px;
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(12px);
+color:white;
+font-size:1rem;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+border:1px solid rgba(255,255,255,0.2);
+}
+
+.hero-btn:hover{
+transform:translateY(-4px);
+background:rgba(255,255,255,0.25);
+}
+
+.menu-button{
+position:fixed;
+top:25px;
+left:25px;
+width:58px;
+height:58px;
+border-radius:50%;
+background:rgba(255,255,255,0.15);
+backdrop-filter:blur(12px);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:1.5rem;
+color:white;
+cursor:pointer;
+z-index:999;
+}
+
+.sidebar{
+position:fixed;
+top:0;
+left:-320px;
+width:300px;
+height:100vh;
+background:rgba(20,20,20,0.95);
+backdrop-filter:blur(20px);
+padding:120px 30px;
+transition:0.4s;
+z-index:998;
+}
+
+.sidebar.active{
+left:0;
+}
+
+.sidebar button{
+width:100%;
+padding:18px;
+margin-bottom:15px;
+border:none;
+border-radius:18px;
+background:rgba(255,255,255,0.08);
+color:white;
+font-size:1rem;
+cursor:pointer;
+transition:0.3s;
+text-align:left;
+}
+
+.sidebar button:hover{
+background:rgba(255,255,255,0.15);
+padding-left:25px;
+}
+
+.section{
+min-height:100vh;
+padding:120px 8%;
+background:#f8f8f8;
+display:none;
+}
+
+.section.active{
+display:block;
+}
+
+.section-title{
+text-align:center;
+font-size:2.5rem;
+margin-bottom:60px;
+color:#222;
+}
+
+.products-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+}
+
+.product-card{
+background:white;
+border-radius:28px;
+padding:30px;
+box-shadow:0 10px 35px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.product-card:hover{
+transform:translateY(-8px);
+}
+
+.product-card h3{
+margin-bottom:12px;
+color:#222;
+}
+
+.product-card p{
+color:#666;
+margin-bottom:20px;
+}
+
+.price{
+font-size:1.5rem;
+font-weight:700;
+margin-bottom:20px;
+color:#5b4bff;
+}
+
+.card-btn{
+display:inline-block;
+padding:14px 22px;
+background:#5b4bff;
+color:white;
+text-decoration:none;
+border-radius:14px;
+}
+
+.turnos-card{
+max-width:850px;
+margin:auto;
+background:white;
+padding:50px;
+border-radius:30px;
+text-align:center;
+box-shadow:0 10px 35px rgba(0,0,0,0.08);
+}
+
+.turnos-card h3{
+font-size:2rem;
+margin-bottom:20px;
+color:#222;
+}
+
+.turnos-card p{
+margin-bottom:15px;
+color:#555;
+}
+
+.contact-btn{
+display:inline-block;
+margin-top:25px;
+padding:16px 28px;
+background:#25D366;
+color:white;
+text-decoration:none;
+border-radius:18px;
+font-weight:600;
+}
+
+.whatsapp{
+position:fixed;
+bottom:25px;
+right:25px;
+width:68px;
+height:68px;
+border-radius:50%;
+background:#25D366;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:2rem;
+text-decoration:none;
+color:white;
+box-shadow:0 8px 25px rgba(0,0,0,0.25);
+z-index:999;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:2.5rem;
+}
+
+.hero p{
+font-size:1.1rem;
+}
+
+.section{
+padding:110px 20px;
+}
+
+.section-title{
+font-size:2rem;
+}
+
+.turnos-card{
+padding:35px 25px;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<div class="hero" id="hero">
-</style></head><body><!-- HERO --><div class="hero" id="hero">
-  <img src="https://i.imgur.com/PgPo6iZ.jpeg">
-  <h2>Consultorio Psicopedagógico</h2>
-  <p>Lic. Daiana Carberol</p>
-  <button onclick="mostrarMenu()">INGRESAR</button>
+<div class="menu-button" onclick="toggleMenu()">
+☰
 </div>
 
-<!-- MENU -->
-<div class="menu" id="menu">
-  <button onclick="mostrar('tienda')">📚 Productos <span>›</span></button>
-  <button onclick="mostrar('turnos')">📅 Turnos <span>›</span></button>
-  <button onclick="mostrar('info')">ℹ️ Información <span>›</span></button>
-  <button onclick="mostrar('contacto')">📷 Instagram <span>›</span></button>
+<div class="sidebar" id="sidebar">
+
+<button onclick="showSection('productos')">
+📚 Productos
+</button>
+
+<button onclick="showSection('turnos')">
+📅 Pedir Turnos
+</button>
+
 </div>
 
-<!-- SECCIONES -->
-<div class="section" id="tienda"><h2>Productos</h2><div id="productos"></div></div>
-<div class="section" id="turnos"><h2>Turnos</h2><p>Solicitar sesiones por WhatsApp: 1134236917</p></div>
-<div class="section" id="info"><h2>Información</h2><p>Pilar Point, Consultorio 6</p></div>
-<div class="section" id="contacto"><h2>Instagram</h2><p>@manitos.pilar</p></div>
+<section class="hero">
 
-<!-- ADMIN LOGIN -->
-<div class="admin-login" id="adminLogin">
-</div><!-- MENU --><div class="menu" id="menu">
-  <button onclick="mostrar('tienda')">🛍️ Productos <span>›</span></button>
-  <button onclick="mostrar('turnos')">🧠 Sesiones Psicopedagogía <span>›</span></button>
-  <button onclick="mostrar('info')">👩‍⚕️ Acerca de nosotros <span>›</span></button>
-</div><!-- SECCIONES --><div class="section" id="tienda"><h2>Productos</h2><div id="productos"></div></div>
-<div class="section" id="turnos"><h2>Sesiones Psicopedagogía</h2><p>Solicitar sesiones por WhatsApp: 1134236917</p></div>
-<div class="section" id="info"><h2>Acerca de nosotros</h2><p>Pilar Point, Consultorio 6</p><p>Instagram: @manitos.pilar</p></div><!-- ADMIN LOGIN --><div class="admin-login" id="adminLogin">
-  <div class="admin-box">
-    <h3>Panel Admin</h3>
-    <input id="user" placeholder="Usuario">
-    <input id="pass" type="password" placeholder="Contraseña">
-    <button onclick="login()">Entrar</button>
-  </div>
+<div class="hero-content">
+
+<h1>
+Consultorio Psicopedagógico
+</h1>
+
+<p>
+Lic. Daiana Carberol
+</p>
+
+<button class="hero-btn" onclick="showSection('productos')">
+INGRESAR
+</button>
+
 </div>
 
-<!-- ADMIN PANEL -->
-<div class="admin-panel" id="adminPanel">
-</div><!-- ADMIN PANEL --><div class="admin-panel" id="adminPanel">
-  <h2>Backoffice</h2>
-  <input id="nombre" placeholder="Producto">
-  <input id="precio" placeholder="Precio">
-  <input id="link" placeholder="Link PDF">
-  <button onclick="agregarProducto()">Guardar</button>
+</section>
+
+<section class="section" id="productos">
+
+<h2 class="section-title">
+Productos Digitales
+</h2>
+
+<div class="products-grid">
+
+<div class="product-card">
+<h3>Cuadernillo Atención</h3>
+<p>Actividades psicopedagógicas para mejorar la concentración.</p>
+<div class="price">$5.000</div>
+<a href="#" class="card-btn">Ver PDF</a>
 </div>
+
+<div class="product-card">
+<h3>Estimulación Cognitiva</h3>
+<p>Material profesional para acompañamiento infantil.</p>
+<div class="price">$6.500</div>
+<a href="#" class="card-btn">Ver PDF</a>
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="turnos">
+
+<h2 class="section-title">
+Solicitar Turnos
+</h2>
+
+<div class="turnos-card">
+
+<h3>
+Atención Psicopedagógica
+</h3>
+
+<p>
+📍 Pilar Point — Consultorio 6
+</p>
+
+<p>
+📧 consultorio@ejemplo.com
+</p>
+
+<p>
+🕒 Lunes a Viernes de 9hs a 18hs
+</p>
+
+<a
+class="contact-btn"
+href="https://wa.me/541134236917"
+target="_blank"
+>
+Solicitar por WhatsApp
+</a>
+
+</div>
+
+</section>
+
+<a
+class="whatsapp"
+href="https://wa.me/541134236917"
+target="_blank"
+>
+💬
+</a>
 
 <script>
-</div><script>
-const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_DOMINIO",
-@@ -239,7 +223,23 @@ <h2>Backoffice</h2>
-    cont.innerHTML="";
-    snapshot.forEach(doc=>{
-      let p=doc.data();
-      cont.innerHTML+=`<div class='card'><h3>${p.nombre}</h3><p>$${p.precio}</p></div>`;
-      cont.innerHTML+=`<div class='card'>
-        <h3>${p.nombre}</h3>
-        <p>$${p.precio}</p>
-        <button onclick="eliminarProducto('${doc.id}')" style="margin-top:10px;padding:8px 12px;border:none;border-radius:10px;background:#ff4d4d;color:white;cursor:pointer;">Eliminar</button>
-      </div>`;
-    });
-  });
+
+function toggleMenu(){
+
+const sidebar = document.getElementById('sidebar');
+sidebar.classList.toggle('active');
+
 }
 
-function eliminarProducto(id){
-  if(confirm("¿Eliminar este producto?")){
-    db.collection("productos").doc(id).delete().then(()=>{
-      alert("Producto eliminado");
-      cargarProductos();
-    });
-  }
-}</h3><p>$${p.precio}</p></div>`;
-    });
-  });
-}
-@@ -254,7 +254,5 @@ <h2>Backoffice</h2>
+function showSection(id){
+
+const sections = document.querySelectorAll('.section');
+
+sections.forEach(section=>{
+section.classList.remove('active');
+});
+
+const target = document.getElementById(id);
+
+target.classList.add('active');
+
+window.scrollTo({
+top:0,
+behavior:'smooth'
+});
+
+const sidebar = document.getElementById('sidebar');
+sidebar.classList.remove('active');
+
 }
 
-cargarProductos();
 </script>
 
 </body>
-</script></body>
 </html>
-
