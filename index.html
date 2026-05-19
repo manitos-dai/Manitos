@@ -1,329 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MANITOS - Psicopedagogía</title>
+<title>MANITOS</title>
 
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
 
 <style>
-*{box-sizing:border-box;scroll-behavior:smooth;}
+<title>MANITOS</title><!-- Firebase --><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script><style>
 body{
   margin:0;
   font-family:'Segoe UI',sans-serif;
-  background:linear-gradient(180deg,#f8fbff,#eef6ff);
-  color:#333;
-  overflow-x:hidden;
-}
-
-/* HEADER PREMIUM */
-.header{
-  position:fixed;
-  top:0;
-  width:100%;
-  background:rgba(255,255,255,0.88);
-  backdrop-filter:blur(14px);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 22px;
-  z-index:999;
-  box-shadow:0 4px 20px rgba(0,0,0,0.06);
-}
-
-.logo{
-  font-size:24px;
-  font-weight:800;
-  background:linear-gradient(90deg,#7aa7ff,#d46a92);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  letter-spacing:1px;
-}
-
-.menu-btn{
-  font-size:28px;
-  cursor:pointer;
-  color:#7aa7ff;
-}
-
-/* MENU HAMBURGUESA */
+@@ -67,6 +60,11 @@
+/* MENU */
 .menu{
-  position:fixed;
-  top:0;
-  right:-320px;
-  width:300px;
+  display:none;
   height:100vh;
-  background:rgba(255,255,255,0.98);
-  backdrop-filter:blur(20px);
-  padding:90px 20px 20px;
-  transition:0.35s;
-  z-index:998;
-  box-shadow:-10px 0 25px rgba(0,0,0,0.08);
-}
-
-.menu.active{right:0;}
-
-.menu button{
-  width:100%;
-  margin:10px 0;
-  padding:18px;
-  border:none;
-  border-radius:18px;
-  background:linear-gradient(90deg,#f7f9ff,#eef6ff);
-  font-size:17px;
-  text-align:left;
-  cursor:pointer;
-  transition:0.25s;
-  font-weight:600;
-}
-
-.menu button:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 20px rgba(122,167,255,0.18);
-}
-
-/* HERO */
-.hero{
-  min-height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  text-align:center;
-  padding:100px 20px 40px;
-  background:
-  radial-gradient(circle at top left,#ffffff 0%,#eef6ff 50%,#fef3f8 100%);
-  position:relative;
-}
-
-.hero::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background-image:url('https://www.transparenttextures.com/patterns/handmade-paper.png');
-  opacity:0.12;
-}
-
-.hero img{
-  width:92%;
-  max-width:620px;
-  position:relative;
-  z-index:2;
-  mix-blend-mode:multiply;
-  filter:drop-shadow(0 10px 25px rgba(0,0,0,0.08));
-}
-
-.hero h2{
-  font-size:42px;
-  margin:10px 0;
-  position:relative;
-  z-index:2;
-}
-
-.hero p{
-  font-size:20px;
-  color:#666;
-  position:relative;
-  z-index:2;
-}
-
-.hero button{
-  margin-top:25px;
-  padding:16px 34px;
-  border:none;
-  border-radius:40px;
-  background:linear-gradient(90deg,#a8edea,#fed6e3);
-  font-size:17px;
-  cursor:pointer;
-  transition:0.25s;
-  position:relative;
-  z-index:2;
-  font-weight:bold;
-}
-
-.hero button:hover{
-  transform:scale(1.05);
-}
-
-/* SECCIONES */
-.section{
-  display:none;
-  padding:110px 20px 40px;
-  max-width:1100px;
-  margin:auto;
-  animation:fade 0.4s ease;
-}
-
-@keyframes fade{
-  from{opacity:0;transform:translateY(10px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-.section h2{
-  font-size:34px;
-  margin-bottom:20px;
-}
-
-.card{
-  background:rgba(255,255,255,0.9);
-  backdrop-filter:blur(10px);
-  padding:24px;
-  border-radius:24px;
-  margin:15px 0;
-  box-shadow:0 10px 30px rgba(0,0,0,0.07);
-}
-
-.product-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-}
-
-.buy-btn{
-  margin-top:15px;
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:14px;
-  background:linear-gradient(90deg,#7aa7ff,#a8edea);
-  color:#fff;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.whatsapp{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:65px;
-  height:65px;
-  border-radius:50%;
-  background:#25D366;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:30px;
-  color:white;
-  text-decoration:none;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
-  z-index:999;
-}
-
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:15px;
-}
-
-.gallery div{
-  height:220px;
-  border-radius:20px;
-  background:linear-gradient(135deg,#dfefff,#fde6f1);
-}
-
-/* ADMIN */
-.admin-login{
-  display:none;
-  min-height:100vh;
-  justify-content:center;
-  align-items:center;
-  background:linear-gradient(180deg,#eef6ff,#ffffff);
-}
-
-.admin-box{
-  background:white;
-  width:340px;
-  padding:35px;
-  border-radius:25px;
-  box-shadow:0 15px 35px rgba(0,0,0,0.08);
-}
-
-.admin-box h3{
-  margin-top:0;
-}
-
-.admin-box input{
-  width:100%;
-  padding:14px;
-  margin:10px 0;
-  border-radius:14px;
-  border:1px solid #ddd;
-}
-
-.admin-box button,
-.admin-panel button{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:14px;
-  background:linear-gradient(90deg,#7aa7ff,#d46a92);
-  color:white;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-.admin-panel{
-  display:none;
-  padding:110px 20px;
-  max-width:700px;
-  margin:auto;
-}
-
-.admin-panel input{
-  width:100%;
-  padding:14px;
-  margin:10px 0;
-  border-radius:14px;
-  border:1px solid #ddd;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:15px;
-  margin-bottom:20px;
-}
-
-.stat-box{
-  background:white;
   padding:20px;
+  text-align:center;
+}
+@@ -78,13 +76,21 @@
+  margin:15px auto;
+  padding:18px;
+  border:none;
+  border-radius:15px;
+  background:#ffffff;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
   border-radius:20px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.06);
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:0 8px 25px rgba(0,0,0,0.2);
+  font-size:18px;
+  text-align:left;
+  cursor:pointer;
+  color:#333;
+  color:#fff;
+  transition: all 0.3s ease;
+}
+
+.menu button:hover{
+  transform: scale(1.05);
+  background: rgba(255,255,255,0.3);
+}
+
+.menu button span{
+@@ -146,53 +152,31 @@
+  display:none;
+  padding:20px;
 }
 </style>
 </head>
+
 <body>
 
-<div class="header">
-  <div class="logo">MANITOS</div>
-  <div class="menu-btn" onclick="toggleMenu()">☰</div>
-</div>
-
-<div class="menu" id="menu">
-  <button onclick="ir('tienda')">📚 Productos</button>
-  <button onclick="ir('turnos')">📅 Turnos</button>
-  <button onclick="ir('info')">ℹ️ Información</button>
-  <button onclick="ir('contacto')">📷 Instagram</button>
-</div>
-
 <!-- HERO -->
-<div class="hero" id="home">
-  <img src="https://i.imgur.com/NTAFsSB.jpeg">
+<div class="hero" id="hero">
+</style></head><body><!-- HERO --><div class="hero" id="hero">
+  <img src="https://i.imgur.com/PgPo6iZ.jpeg">
   <h2>Consultorio Psicopedagógico</h2>
   <p>Lic. Daiana Carberol</p>
-  <button onclick="ir('tienda')">Ver materiales</button>
+  <button onclick="mostrarMenu()">INGRESAR</button>
+</div>
+
+<!-- MENU -->
+<div class="menu" id="menu">
+  <button onclick="mostrar('tienda')">📚 Productos <span>›</span></button>
+  <button onclick="mostrar('turnos')">📅 Turnos <span>›</span></button>
+  <button onclick="mostrar('info')">ℹ️ Información <span>›</span></button>
+  <button onclick="mostrar('contacto')">📷 Instagram <span>›</span></button>
 </div>
 
 <!-- SECCIONES -->
 <div class="section" id="tienda"><h2>Productos</h2><div id="productos"></div></div>
-<div class="section" id="turnos"><h2>Turnos</h2><div class="card">WhatsApp: 1134236917</div></div>
-<div class="section" id="info"><h2>Información</h2><div class="card">Pilar Point, Consultorio 6</div></div>
-<div class="section" id="contacto"><h2>Instagram</h2><div class="card">@manitos.pilar</div></div>
+<div class="section" id="turnos"><h2>Turnos</h2><p>Solicitar sesiones por WhatsApp: 1134236917</p></div>
+<div class="section" id="info"><h2>Información</h2><p>Pilar Point, Consultorio 6</p></div>
+<div class="section" id="contacto"><h2>Instagram</h2><p>@manitos.pilar</p></div>
 
-<!-- ADMIN -->
+<!-- ADMIN LOGIN -->
 <div class="admin-login" id="adminLogin">
+</div><!-- MENU --><div class="menu" id="menu">
+  <button onclick="mostrar('tienda')">🛍️ Productos <span>›</span></button>
+  <button onclick="mostrar('turnos')">🧠 Sesiones Psicopedagogía <span>›</span></button>
+  <button onclick="mostrar('info')">👩‍⚕️ Acerca de nosotros <span>›</span></button>
+</div><!-- SECCIONES --><div class="section" id="tienda"><h2>Productos</h2><div id="productos"></div></div>
+<div class="section" id="turnos"><h2>Sesiones Psicopedagogía</h2><p>Solicitar sesiones por WhatsApp: 1134236917</p></div>
+<div class="section" id="info"><h2>Acerca de nosotros</h2><p>Pilar Point, Consultorio 6</p><p>Instagram: @manitos.pilar</p></div><!-- ADMIN LOGIN --><div class="admin-login" id="adminLogin">
   <div class="admin-box">
     <h3>Panel Admin</h3>
     <input id="user" placeholder="Usuario">
@@ -332,76 +102,53 @@ body{
   </div>
 </div>
 
+<!-- ADMIN PANEL -->
 <div class="admin-panel" id="adminPanel">
-<h2>Backoffice</h2>
-<input id="nombre" placeholder="Producto">
-<input id="precio" placeholder="Precio">
-<input id="link" placeholder="Link PDF">
-<button onclick="agregarProducto()">Guardar</button>
+</div><!-- ADMIN PANEL --><div class="admin-panel" id="adminPanel">
+  <h2>Backoffice</h2>
+  <input id="nombre" placeholder="Producto">
+  <input id="precio" placeholder="Precio">
+  <input id="link" placeholder="Link PDF">
+  <button onclick="agregarProducto()">Guardar</button>
 </div>
 
 <script>
-
+</div><script>
 const firebaseConfig = {
-apiKey: "TU_API_KEY",
-authDomain: "TU_DOMINIO",
-projectId: "TU_PROJECT_ID"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-function toggleMenu(){
-  document.getElementById('menu').classList.toggle('active');
-}
-
-function ir(id){
-  document.getElementById('home').style.display='none';
-  document.querySelectorAll('.section').forEach(s=>s.style.display='none');
-  document.getElementById(id).style.display='block';
-  document.getElementById('menu').classList.remove('active');
-}
-
-// ADMIN FIX
-if(window.location.hash === "#admin"){
-  document.getElementById('home').style.display='none';
-  document.getElementById('menu').style.display='none';
-  document.getElementById('adminLogin').style.display='flex';
-}
-
-function login(){
-  let u=document.getElementById('user').value;
-  let p=document.getElementById('pass').value;
-  if(u==="admin" && p==="1234"){
-    document.getElementById('adminLogin').style.display='none';
-    document.getElementById('adminPanel').style.display='block';
-  }else{alert("Datos incorrectos");}
-}
-
-function cargarProductos(){
-  db.collection("productos").get().then(snapshot=>{
-    let cont=document.getElementById("productos");
+  apiKey: "TU_API_KEY",
+  authDomain: "TU_DOMINIO",
+@@ -239,7 +223,23 @@ <h2>Backoffice</h2>
     cont.innerHTML="";
     snapshot.forEach(doc=>{
       let p=doc.data();
       cont.innerHTML+=`<div class='card'><h3>${p.nombre}</h3><p>$${p.precio}</p></div>`;
+      cont.innerHTML+=`<div class='card'>
+        <h3>${p.nombre}</h3>
+        <p>$${p.precio}</p>
+        <button onclick="eliminarProducto('${doc.id}')" style="margin-top:10px;padding:8px 12px;border:none;border-radius:10px;background:#ff4d4d;color:white;cursor:pointer;">Eliminar</button>
+      </div>`;
     });
   });
 }
 
-function agregarProducto(){
-  let n=document.getElementById("nombre").value;
-  let p=parseInt(document.getElementById("precio").value);
-  let l=document.getElementById("link").value;
-  db.collection("productos").add({nombre:n,precio:p,link:l});
-  alert("Guardado");
-  cargarProductos();
+function eliminarProducto(id){
+  if(confirm("¿Eliminar este producto?")){
+    db.collection("productos").doc(id).delete().then(()=>{
+      alert("Producto eliminado");
+      cargarProductos();
+    });
+  }
+}</h3><p>$${p.precio}</p></div>`;
+    });
+  });
+}
+@@ -254,7 +254,5 @@ <h2>Backoffice</h2>
 }
 
 cargarProductos();
-
 </script>
 
 </body>
+</script></body>
 </html>
-
 
