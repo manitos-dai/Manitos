@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,97 +11,269 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-}body{ font-family:'Poppins',sans-serif; background:#f5f5f5; overflow-x:hidden; color:#222; }
+}
 
-.hero{ width:100%; height:100vh; background-image:url('https://i.imgur.com/irQKj2p.png'); background-position:center; background-repeat:no-repeat; background-size:contain; background-color:white; }
+body{
+font-family:'Poppins',sans-serif;
+background:#f5f5f5;
+overflow-x:hidden;
+color:#222;
+}
 
-.menu-button{ position:fixed; top:20px; left:20px; width:60px; height:60px; border-radius:18px; background:rgba(0,0,0,0.85); display:flex; justify-content:center; align-items:center; font-size:28px; color:white; cursor:pointer; z-index:99999; }
+.hero{
+width:100%;
+height:100vh;
+background-image:url('https://i.imgur.com/irQKj2p.png');
+background-position:center;
+background-repeat:no-repeat;
+background-size:contain;
+background-color:white;
+}
 
-.sidebar{ position:fixed; top:0; left:-300px; width:280px; height:100vh; background:#111; padding:120px 25px; transition:0.4s; z-index:99998; }
+.menu-button{
+position:fixed;
+top:20px;
+left:20px;
+width:60px;
+height:60px;
+border-radius:18px;
+background:rgba(0,0,0,0.85);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:28px;
+color:white;
+cursor:pointer;
+z-index:99999;
+}
 
-.sidebar.active{ left:0; }
+.sidebar{
+position:fixed;
+top:0;
+left:-300px;
+width:280px;
+height:100vh;
+background:#111;
+padding:120px 25px;
+transition:0.4s;
+z-index:99998;
+}
 
-.sidebar button{ width:100%; padding:18px; margin-bottom:15px; border:none; border-radius:16px; background:#222; color:white; font-size:16px; cursor:pointer; }
+.sidebar.active{
+left:0;
+}
 
-.section{ display:none; min-height:100vh; padding:120px 8%; }
+.sidebar button{
+width:100%;
+padding:18px;
+margin-bottom:15px;
+border:none;
+border-radius:16px;
+background:#222;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
 
-.section.active{ display:block; }
+.section{
+display:none;
+min-height:100vh;
+padding:120px 8%;
+}
 
-.section-title{ text-align:center; font-size:40px; margin-bottom:50px; }
+.section.active{
+display:block;
+}
 
-.products-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px; }
+.section-title{
+text-align:center;
+font-size:40px;
+margin-bottom:50px;
+}
 
-.product-card, .info-card, .admin-card{ background:white; padding:30px; border-radius:24px; box-shadow:0 10px 25px rgba(0,0,0,0.08); }
+.products-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+}
 
-.product-card img, .info-card img{ width:100%; border-radius:18px; margin-bottom:20px; }
+.product-card,
+.info-card,
+.admin-card{
+background:white;
+padding:30px;
+border-radius:24px;
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
 
-.price{ font-size:24px; font-weight:700; margin:18px 0; color:#5b4bff; }
+.product-card img,
+.info-card img{
+width:100%;
+border-radius:18px;
+margin-bottom:20px;
+}
 
-.card-btn, .contact-btn, .admin-card button, .delete-btn{ padding:14px 22px; background:#5b4bff; color:white; text-decoration:none; border:none; border-radius:14px; cursor:pointer; }
+.price{
+font-size:24px;
+font-weight:700;
+margin:18px 0;
+color:#5b4bff;
+}
 
-.delete-btn{ background:#ff4d4d; margin-top:15px; }
+.card-btn,
+.contact-btn,
+.admin-card button,
+.delete-btn{
+padding:14px 22px;
+background:#5b4bff;
+color:white;
+text-decoration:none;
+border:none;
+border-radius:14px;
+cursor:pointer;
+}
 
-.whatsapp{ position:fixed; bottom:25px; right:25px; width:70px; height:70px; border-radius:50%; background:#25D366; display:flex; justify-content:center; align-items:center; z-index:99999; }
+.delete-btn{
+background:#ff4d4d;
+margin-top:15px;
+}
 
-.admin-toggle{ position:fixed; top:20px; right:20px; padding:12px 18px; background:#111; color:white; border:none; border-radius:14px; cursor:pointer; z-index:99999; }
+.whatsapp{
+position:fixed;
+bottom:25px;
+right:25px;
+width:70px;
+height:70px;
+border-radius:50%;
+background:#25D366;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:99999;
+}
 
-.admin-panel{ display:none; position:fixed; inset:0; background:white; overflow:auto; padding:120px 20px 40px; z-index:99997; }
+.admin-toggle{
+position:fixed;
+top:20px;
+right:20px;
+padding:12px 18px;
+background:#111;
+color:white;
+border:none;
+border-radius:14px;
+cursor:pointer;
+z-index:99999;
+}
 
-.admin-panel.active{ display:block; }
+.admin-panel{
+display:none;
+position:fixed;
+inset:0;
+background:white;
+overflow:auto;
+padding:120px 20px 40px;
+z-index:99997;
+}
 
-.admin-wrapper{ max-width:1200px; margin:auto; }
+.admin-panel.active{
+display:block;
+}
 
-.admin-card{ margin-bottom:30px; }
+.admin-wrapper{
+max-width:1200px;
+margin:auto;
+}
 
-.admin-card input, .admin-card textarea{ width:100%; padding:16px; margin-bottom:15px; border:1px solid #ddd; border-radius:14px; font-family:'Poppins',sans-serif; }
+.admin-card{
+margin-bottom:30px;
+}
 
-@media(max-width:768px){ .hero{ background-size:contain; }
+.admin-card input,
+.admin-card textarea{
+width:100%;
+padding:16px;
+margin-bottom:15px;
+border:1px solid #ddd;
+border-radius:14px;
+font-family:'Poppins',sans-serif;
+}
 
-.section-title{ font-size:30px; } } </style>
+@media(max-width:768px){
+.hero{
+background-size:contain;
+}
 
+.section-title{
+font-size:30px;
+}
+}
+</style>
 </head>
-<body><div class="menu-button" onclick="toggleMenu()">☰</div>
-<div onclick="abrirAdmin()" style="position:fixed;bottom:10px;left:10px;width:20px;height:20px;z-index:999999;"></div><div class="sidebar" id="sidebar">
+<body>
+
+<button class="admin-toggle" onclick="toggleAdmin()">ADMIN</button>
+
+<div class="menu-button" onclick="toggleMenu()">☰</div>
+
+<div class="sidebar" id="sidebar">
 <button onclick="showSection('productos')">📚 Productos</button>
 <button onclick="showSection('sobre')">👩‍⚕️ Sobre mí</button>
 <button onclick="showSection('turnos')">📅 Pedir Turnos</button>
-</div><section class="hero" id="hero"></section><section class="section" id="productos">
+</div>
+
+<section class="hero" id="hero"></section>
+
+<section class="section" id="productos">
 <h2 class="section-title">Productos Digitales</h2>
 <div class="products-grid" id="productos-container"></div>
-</section><section class="section" id="sobre">
-<div class="info-card" id="sobre-container">
-<h2>Sobre mí</h2>
-<p>Información próximamente.</p>
-</div>
-</section><section class="section" id="turnos">
+</section>
+
+<section class="section" id="sobre">
+<div class="info-card" id="sobre-container"></div>
+</section>
+
+<section class="section" id="turnos">
 <div class="info-card">
 <h3>Solicitar Turnos</h3>
 <p>📧 consultoriomanitos@gmail.com</p>
 <br>
 <a class="contact-btn" href="https://wa.me/541134236917" target="_blank">WhatsApp</a>
 </div>
-</section><div class="admin-panel active" id="adminPanel" style="display:none;">
-<div class="admin-wrapper"><div class="admin-card">
+</section>
+
+<div class="admin-panel" id="adminPanel">
+<div class="admin-wrapper">
+
+<div class="admin-card">
 <h2>📚 Agregar Producto</h2>
 <input type="text" id="nombre" placeholder="Nombre del producto">
 <input type="text" id="precio" placeholder="Precio">
 <input type="text" id="pdf" placeholder="Link PDF">
 <input type="text" id="imagen" placeholder="Link Imagen Preview">
 <button onclick="agregarProducto()">Guardar Producto</button>
-</div><div class="admin-card">
+</div>
+
+<div class="admin-card">
 <h2>👩‍⚕️ Editar Sobre Mí</h2>
 <input type="text" id="sobreTitulo" placeholder="Título">
 <textarea id="sobreTexto" placeholder="Descripción"></textarea>
 <input type="text" id="sobreImagen" placeholder="Link Imagen">
-<input type="file" id="sobreImagenFile" accept="image/*">
 <button onclick="guardarSobreMi()">Guardar Información</button>
-</div><div class="admin-card">
+</div>
+
+<div class="admin-card">
 <h2>🛍️ Productos Cargados</h2>
 <div id="admin-productos"></div>
-</div></div>
-</div><a class="whatsapp" href="https://wa.me/541134236917" target="_blank">
+</div>
+
+</div>
+</div>
+
+<a class="whatsapp" href="https://wa.me/541134236917" target="_blank">
 <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="34">
-</a><script>
+</a>
+
+<script>
 const SUPABASE_URL = 'TU_SUPABASE_URL';
 const SUPABASE_KEY = 'TU_SUPABASE_ANON_KEY';
 
@@ -109,21 +282,12 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const sidebar = document.getElementById('sidebar');
 const adminPanel = document.getElementById('adminPanel');
 
-if(window.location.hash === '#admin'){
-adminPanel.style.display='block';
-}
-
 function toggleMenu(){
 sidebar.classList.toggle('active');
 }
 
-function abrirAdmin(){
-const password = prompt('Ingresar contraseña admin');
-
-if(password === 'manitosadmin'){
-window.location.hash = 'admin';
-document.getElementById('adminPanel').style.display='block';
-}
+function toggleAdmin(){
+adminPanel.classList.toggle('active');
 }
 
 function showSection(id){
@@ -224,5 +388,7 @@ cargarSobreMi();
 
 cargarProductos();
 cargarSobreMi();
-</script></body>
+</script>
+
+</body>
 </html>
