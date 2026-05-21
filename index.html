@@ -1,113 +1,12 @@
-# index.html
-
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Consultorio Psicopedagógico</title>
-<link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-</head>
-<body>
-
-<div class="menu-button" onclick="toggleMenu()">☰</div>
-
-<div class="sidebar" id="sidebar">
-<button onclick="showSection('productos')">📚 Productos</button>
-<button onclick="showSection('sobre')">👩‍⚕️ Sobre mí</button>
-<button onclick="showSection('turnos')">📅 Pedir Turnos</button>
-</div>
-
-<section class="hero" id="hero"></section>
-
-<section class="section" id="productos">
-<h2 class="section-title">Productos Digitales</h2>
-<div class="products-grid" id="productos-container"></div>
-</section>
-
-<section class="section" id="sobre">
-<div class="info-card" id="sobre-container"></div>
-</section>
-
-<section class="section" id="turnos">
-<div class="info-card">
-<h3>Solicitar Turnos</h3>
-<p>📧 consultoriomanitos@gmail.com</p>
-<a class="contact-btn" href="https://wa.me/541134236917" target="_blank">WhatsApp</a>
-</div>
-</section>
-
-<a class="whatsapp" href="https://wa.me/541134236917" target="_blank">
-<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="34">
-</a>
-
-<script src="supabase.js"></script>
-<script src="script.js"></script>
-
-</body>
-</html>
-```
-
-# admin.html
-
-```html
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Back Office | Manitos</title>
-<link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-</head>
-<body class="admin-body">
-
-<div class="admin-wrapper">
-
-<h1>Back Office</h1>
-
-<div class="admin-card">
-<h2>📚 Agregar Producto</h2>
-
-<input type="text" id="nombre" placeholder="Nombre del producto">
-<input type="text" id="precio" placeholder="Precio">
-<input type="text" id="pdf" placeholder="Link PDF">
-<input type="text" id="imagen" placeholder="Link Imagen Preview">
-
-<button onclick="agregarProducto()">Guardar Producto</button>
-</div>
-
-<div class="admin-card">
-<h2>👩‍⚕️ Editar Sobre Mí</h2>
-
-<input type="text" id="sobreTitulo" placeholder="Título">
-<textarea id="sobreTexto" placeholder="Descripción"></textarea>
-<input type="text" id="sobreImagen" placeholder="Link Imagen">
-
-<button onclick="guardarSobreMi()">Guardar Información</button>
-</div>
-
-<div class="admin-card">
-<h2>🛍️ Productos Cargados</h2>
-<div id="admin-productos"></div>
-</div>
-
-</div>
-
-<script src="supabase.js"></script>
-<script src="script.js"></script>
-
-</body>
-</html>
-```
-
-# style.css
-
-```css
+<style>
 *{
 margin:0;
 padding:0;
@@ -125,7 +24,7 @@ color:#222;
 width:100%;
 height:100vh;
 background-image:url('https://i.imgur.com/irQKj2p.png');
-background-position:center center;
+background-position:center;
 background-repeat:no-repeat;
 background-size:contain;
 background-color:white;
@@ -138,11 +37,11 @@ left:20px;
 width:60px;
 height:60px;
 border-radius:18px;
-background:rgba(0,0,0,0.8);
+background:rgba(0,0,0,0.85);
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:1.7rem;
+font-size:28px;
 color:white;
 cursor:pointer;
 z-index:99999;
@@ -151,7 +50,7 @@ z-index:99999;
 .sidebar{
 position:fixed;
 top:0;
-left:-320px;
+left:-300px;
 width:280px;
 height:100vh;
 background:#111;
@@ -172,7 +71,7 @@ border:none;
 border-radius:16px;
 background:#222;
 color:white;
-font-size:1rem;
+font-size:16px;
 cursor:pointer;
 }
 
@@ -188,7 +87,7 @@ display:block;
 
 .section-title{
 text-align:center;
-font-size:2.5rem;
+font-size:40px;
 margin-bottom:50px;
 }
 
@@ -215,7 +114,7 @@ margin-bottom:20px;
 }
 
 .price{
-font-size:1.4rem;
+font-size:24px;
 font-weight:700;
 margin:18px 0;
 color:#5b4bff;
@@ -225,7 +124,6 @@ color:#5b4bff;
 .contact-btn,
 .admin-card button,
 .delete-btn{
-display:inline-block;
 padding:14px 22px;
 background:#5b4bff;
 color:white;
@@ -254,8 +152,31 @@ align-items:center;
 z-index:99999;
 }
 
-.admin-body{
-padding:50px 20px;
+.admin-toggle{
+position:fixed;
+top:20px;
+right:20px;
+padding:12px 18px;
+background:#111;
+color:white;
+border:none;
+border-radius:14px;
+cursor:pointer;
+z-index:99999;
+}
+
+.admin-panel{
+display:none;
+position:fixed;
+inset:0;
+background:white;
+overflow:auto;
+padding:120px 20px 40px;
+z-index:99997;
+}
+
+.admin-panel.active{
+display:block;
 }
 
 .admin-wrapper{
@@ -276,58 +197,112 @@ border:1px solid #ddd;
 border-radius:14px;
 font-family:'Poppins',sans-serif;
 }
-```
 
-# supabase.js
+@media(max-width:768px){
+.hero{
+background-size:contain;
+}
 
-```javascript
+.section-title{
+font-size:30px;
+}
+}
+</style>
+</head>
+<body>
+
+<button class="admin-toggle" onclick="toggleAdmin()">ADMIN</button>
+
+<div class="menu-button" onclick="toggleMenu()">☰</div>
+
+<div class="sidebar" id="sidebar">
+<button onclick="showSection('productos')">📚 Productos</button>
+<button onclick="showSection('sobre')">👩‍⚕️ Sobre mí</button>
+<button onclick="showSection('turnos')">📅 Pedir Turnos</button>
+</div>
+
+<section class="hero" id="hero"></section>
+
+<section class="section" id="productos">
+<h2 class="section-title">Productos Digitales</h2>
+<div class="products-grid" id="productos-container"></div>
+</section>
+
+<section class="section" id="sobre">
+<div class="info-card" id="sobre-container"></div>
+</section>
+
+<section class="section" id="turnos">
+<div class="info-card">
+<h3>Solicitar Turnos</h3>
+<p>📧 consultoriomanitos@gmail.com</p>
+<br>
+<a class="contact-btn" href="https://wa.me/541134236917" target="_blank">WhatsApp</a>
+</div>
+</section>
+
+<div class="admin-panel" id="adminPanel">
+<div class="admin-wrapper">
+
+<div class="admin-card">
+<h2>📚 Agregar Producto</h2>
+<input type="text" id="nombre" placeholder="Nombre del producto">
+<input type="text" id="precio" placeholder="Precio">
+<input type="text" id="pdf" placeholder="Link PDF">
+<input type="text" id="imagen" placeholder="Link Imagen Preview">
+<button onclick="agregarProducto()">Guardar Producto</button>
+</div>
+
+<div class="admin-card">
+<h2>👩‍⚕️ Editar Sobre Mí</h2>
+<input type="text" id="sobreTitulo" placeholder="Título">
+<textarea id="sobreTexto" placeholder="Descripción"></textarea>
+<input type="text" id="sobreImagen" placeholder="Link Imagen">
+<button onclick="guardarSobreMi()">Guardar Información</button>
+</div>
+
+<div class="admin-card">
+<h2>🛍️ Productos Cargados</h2>
+<div id="admin-productos"></div>
+</div>
+
+</div>
+</div>
+
+<a class="whatsapp" href="https://wa.me/541134236917" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="34">
+</a>
+
+<script>
 const SUPABASE_URL = 'TU_SUPABASE_URL';
 const SUPABASE_KEY = 'TU_SUPABASE_ANON_KEY';
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-```
 
-# script.js
-
-```javascript
 const sidebar = document.getElementById('sidebar');
+const adminPanel = document.getElementById('adminPanel');
 
 function toggleMenu(){
-if(sidebar){
 sidebar.classList.toggle('active');
 }
+
+function toggleAdmin(){
+adminPanel.classList.toggle('active');
 }
 
 function showSection(id){
+document.getElementById('hero').style.display='none';
 
-const hero = document.getElementById('hero');
-
-if(hero){
-hero.style.display='none';
-}
-
-const sections = document.querySelectorAll('.section');
-
-sections.forEach(section=>{
+document.querySelectorAll('.section').forEach(section=>{
 section.classList.remove('active');
 });
 
-const target = document.getElementById(id);
-
-if(target){
-target.classList.add('active');
-}
-
-if(sidebar){
+document.getElementById(id).classList.add('active');
 sidebar.classList.remove('active');
-}
-
 window.scrollTo(0,0);
-
 }
 
 async function cargarProductos(){
-
 const { data } = await supabaseClient
 .from('productos')
 .select('*')
@@ -336,12 +311,10 @@ const { data } = await supabaseClient
 const container = document.getElementById('productos-container');
 const adminContainer = document.getElementById('admin-productos');
 
-if(container){
-
 container.innerHTML='';
+adminContainer.innerHTML='';
 
 (data || []).forEach(producto=>{
-
 container.innerHTML += `
 <div class="product-card">
 <img src="${producto.imagen}">
@@ -351,32 +324,17 @@ container.innerHTML += `
 </div>
 `;
 
-});
-
-}
-
-if(adminContainer){
-
-adminContainer.innerHTML='';
-
-(data || []).forEach(producto=>{
-
 adminContainer.innerHTML += `
-<div class="admin-product">
+<div class="admin-card">
 <h3>${producto.nombre}</h3>
-<p>Precio: $${producto.precio}</p>
+<p>$${producto.precio}</p>
 <button class="delete-btn" onclick="eliminarProducto(${producto.id})">Eliminar</button>
 </div>
 `;
-
 });
-
-}
-
 }
 
 async function agregarProducto(){
-
 const nombre = document.getElementById('nombre').value;
 const precio = document.getElementById('precio').value;
 const pdf = document.getElementById('pdf').value;
@@ -387,46 +345,35 @@ await supabaseClient
 .insert([{nombre,precio,pdf,imagen}]);
 
 alert('Producto agregado');
-
 cargarProductos();
-
 }
 
 async function eliminarProducto(id){
-
 await supabaseClient
 .from('productos')
 .delete()
 .eq('id',id);
 
 cargarProductos();
-
 }
 
 async function cargarSobreMi(){
-
 const { data } = await supabaseClient
 .from('sobre_mi')
 .select('*')
 .limit(1)
 .single();
 
-const sobreContainer = document.getElementById('sobre-container');
-
-if(sobreContainer && data){
-
-sobreContainer.innerHTML = `
+if(data){
+document.getElementById('sobre-container').innerHTML = `
 <img src="${data.imagen}">
 <h3>${data.titulo}</h3>
 <p>${data.texto}</p>
 `;
-
 }
-
 }
 
 async function guardarSobreMi(){
-
 const titulo = document.getElementById('sobreTitulo').value;
 const texto = document.getElementById('sobreTexto').value;
 const imagen = document.getElementById('sobreImagen').value;
@@ -436,30 +383,12 @@ await supabaseClient
 .upsert([{id:1,titulo,texto,imagen}]);
 
 alert('Información actualizada');
-
 cargarSobreMi();
-
 }
 
 cargarProductos();
 cargarSobreMi();
-```
+</script>
 
-# supabase.sql
-
-```sql
-create table productos (
-id bigint generated by default as identity primary key,
-nombre text,
-precio text,
-pdf text,
-imagen text
-);
-
-create table sobre_mi (
-id bigint primary key,
-titulo text,
-texto text,
-imagen text
-);
-```
+</body>
+</html>
