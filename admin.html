@@ -27,10 +27,19 @@
 
   <div class="admin-wrapper" id="adminWrapper">
 
-    <h1>Back Office</h1>
+<div class="admin-sidebar">
+  <button class="admin-menu-btn" data-admin="productosAdmin">📚 Productos</button>
+  <button class="admin-menu-btn" data-admin="sobreAdmin">👩‍⚕️ Sobre mí</button>
+  <button class="admin-menu-btn" data-admin="sesionesAdmin">📅 Solicitar Sesiones</button>
+</div>
 
-    <div class="admin-card">
-      <h2>Agregar Producto</h2>
+<div class="admin-content">
+
+    <h1 class="admin-title">✨ MODIFICACIONES ✨</h1>
+
+    <div class="admin-section active" id="productosAdmin">
+<div class="admin-card">
+<h2>📚 Gestión de Productos</h2>
 
       <input type="text" id="nombre" placeholder="Nombre del PDF">
       <input type="text" id="precio" placeholder="Precio">
@@ -44,8 +53,12 @@
       <button id="guardarProducto">Guardar Producto</button>
     </div>
 
-    <div class="admin-card">
-      <h2>Editar Sobre Mí</h2>
+    </div>
+</div>
+
+<div class="admin-section" id="sobreAdmin">
+<div class="admin-card">
+<h2>👩‍⚕️ Editar Sobre Mí</h2>
 
       <input type="text" id="sobreTitulo" placeholder="Título">
 
@@ -58,15 +71,30 @@
       <button id="guardarSobre">Guardar Información</button>
     </div>
 
-    <div class="admin-card">
-      <h2>Productos Cargados</h2>
+    </div>
+</div>
+
+<div class="admin-section" id="sesionesAdmin">
+<div class="admin-card">
+<h2>📅 Solicitar Sesiones</h2>
+<p>📧 consultoriomanitos@gmail.com</p>
+<p>📱 11 3423-6917</p>
+<a href="https://wa.me/541134236917" target="_blank" class="card-btn">
+Abrir WhatsApp
+</a>
+</div>
+</div>
+
+<div class="admin-section active" id="productosAdminLista">
+<div class="admin-card">
+<h2>🛍️ Productos Cargados</h2>
 
       <div id="adminProductos"></div>
     </div>
+</div>
+</div>
 
-  </div>
-
-  <script src="supabase.js"></script>
+<script src="supabase.js"></script>
   <script src="admin.js"></script>
 
 </body>
