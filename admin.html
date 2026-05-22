@@ -1,1 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Back Office</title>
 
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="admin-body">
+
+  <div class="login-screen" id="loginScreen">
+
+    <div class="login-box">
+      <h2>Admin Login</h2>
+
+      <input type="text" id="username" placeholder="Usuario">
+      <input type="password" id="password" placeholder="Contraseña">
+
+      <button id="loginBtn">Ingresar</button>
+    </div>
+
+  </div>
+
+  <div class="admin-wrapper" id="adminWrapper">
+
+    <h1>Back Office</h1>
+
+    <div class="admin-card">
+      <h2>Agregar Producto</h2>
+
+      <input type="text" id="nombre" placeholder="Nombre del PDF">
+      <input type="text" id="precio" placeholder="Precio">
+
+      <label>Subir PDF</label>
+      <input type="file" id="pdf" accept="application/pdf">
+
+      <label>Subir Imagen</label>
+      <input type="file" id="imagen:imageUrl" accept="image/*">
+
+      <button id="guardarProducto">Guardar Producto</button>
+    </div>
+
+    <div class="admin-card">
+      <h2>Editar Sobre Mí</h2>
+
+      <input type="text" id="sobreTitulo" placeholder="Título">
+
+      <textarea id="sobreTexto" placeholder="Descripción"></textarea>
+
+      <label>Subir Imagen Sobre Mi</label>
+
+      <input type="file" id="sobreImagen" accept="image/*">
+
+      <button id="guardarSobre">Guardar Información</button>
+    </div>
+
+    <div class="admin-card">
+      <h2>Productos Cargados</h2>
+
+      <div id="adminProductos"></div>
+    </div>
+
+  </div>
+
+  <script src="supabase.js"></script>
+  <script src="admin.js"></script>
+
+</body>
+</html>
