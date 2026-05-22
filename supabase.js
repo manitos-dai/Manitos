@@ -1,6 +1,5 @@
-const SUPABASE_URL = 'https://ofngjvojskucaqnehcpv.supabase.co';
-
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mbmdqdm9qc2t1Y2FxbmVoY3B2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzNzUyNzAsImV4cCI6MjA5NDk1MTI3MH0.YmU0yZae9M0fVSShXIsPLEN2iE-pBQ_FI4Mr4mYD424';
+const SUPABASE_URL = 'TU_SUPABASE_URL';
+const SUPABASE_KEY = 'TU_SUPABASE_ANON_KEY';
 
 const supabaseClient = supabase.createClient(
   SUPABASE_URL,
@@ -9,3 +8,11 @@ const supabaseClient = supabase.createClient(
 
 const PRODUCTOS_BUCKET = 'productos';
 const SOBREMI_BUCKET = 'sobremi';
+```javascript
+const SUPABASE_URL = 'TU_SUPABASE_URL';
+const SUPABASE_KEY = 'TU_SUPABASE_ANON_KEY';
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
