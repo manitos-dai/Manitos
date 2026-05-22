@@ -1,8 +1,8 @@
 const loginScreen = document.getElementById('loginScreen');
 const adminWrapper = document.getElementById('adminWrapper');
 
-const USER = 'CONEJITA';
-const PASS = 'meme356*';
+const USER = 'manotas';
+const PASS = 'conejita123*';
 
 const loginBtn = document.getElementById('loginBtn');
 
@@ -95,7 +95,11 @@ async function cargarAdminProductos(){
 
         <p>$${producto.precio}</p>
 
-        <button class="delete-btn" onclick="eliminarProducto(${producto.id})">
+        <button class="card-btn" onclick="editarProducto(${producto.id})">
+Editar
+</button>
+
+<button class="delete-btn" onclick="eliminarProducto(${producto.id})">
           Eliminar
         </button>
 
@@ -177,4 +181,51 @@ document.getElementById('guardarProducto')
 
 
 document.getElementById('guardarSobre')
+.addEventListener('click',guardarSobreMi);
+
+const adminMenuButtons = document.querySelectorAll('.admin-menu-btn');
+
+adminMenuButtons.forEach(button=>{
+
+button.addEventListener('click',()=>{
+
+const target = button.dataset.admin;
+
+const sections = document.querySelectorAll('.admin-section');
+
+sections.forEach(section=>{
+section.classList.remove('active');
+});
+
+if(target === 'productosAdmin'){
+document.getElementById('productosAdmin').classList.add('active');
+document.getElementById('productosAdminLista').classList.add('active');
+}else{
+document.getElementById(target).classList.add('active');
+}
+
+});
+
+});
+
+async function editarProducto(id){
+
+const nuevoNombre = prompt('Nuevo nombre');
+const nuevoPrecio = prompt('Nuevo precio');
+
+if(!nuevoNombre || !nuevoPrecio) return;
+
+await supabaseClient
+.from('productos')
+.update({
+nombre:nuevoNombre,
+precio:nuevoPrecio
+})
+.eq('id',id);
+
+cargarAdminProductos();
+
+alert('Producto actualizado');
+
+}
 .addEventListener('click',guardarSobreMi);
