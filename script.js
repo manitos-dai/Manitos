@@ -1,87 +1,111 @@
-const menuBtn = document.getElementById('menuBtn');
-const sidebar = document.getElementById('sidebar');
+const menuToggle = document.getElementById('menuToggle');
+const sideMenu = document.getElementById('sideMenu');
 
-menuBtn.addEventListener('click',()=>{
-  sidebar.classList.toggle('active');
+menuToggle.addEventListener('click',()=>{
+
+  sideMenu.classList.toggle('active');
+
 });
 
-const menuButtons = document.querySelectorAll('[data-section]');
+function showSection(id){
 
-menuButtons.forEach(button=>{
+  document.getElementById('hero').style.display='none';
 
-  button.addEventListener('click',()=>{
+  const sections = document.querySelectorAll('.section');
 
-    const target = button.dataset.section;
+  sections.forEach(section=>{
 
-    document.getElementById('hero').style.display='none';
-
-    document.querySelectorAll('.section').forEach(section=>{
-      section.classList.remove('active');
-    });
-
-    document.getElementById(target).classList.add('active');
-
-    sidebar.classList.remove('active');
-
-    window.scrollTo(0,0);
+    section.classList.remove('active');
 
   });
 
-});
+  document.getElementById(id).classList.add('active');
+
+  sideMenu.classList.remove('active');
+}
 
 async function cargarProductos(){
 
-  const { data } = await supabaseClient
-  .from('productos')
-  .select('*')
-  .order('id',{ascending:false});
+  try{
 
-  const container = document.getElementById('productosContainer');
+    const { data,error } = await supabaseClient
+    .from('productos')
+    .select('*');
 
-  container.innerHTML='';
+    if(error){
 
-  data.forEach(producto=>{
+      console.log(error);
+      return;
 
-    container.innerHTML += `
-      <div class="product-card">
+    }
 
-        <img src="${producto.imagen}" alt="${producto.nombre}">
+    const container = document.getElementById('productosContainer');
+
+    container.innerHTML='';
+
+    data.forEach(producto=>{
+
+      container.innerHTML += `
+
+      <div class="card">
+
+        <img src="${producto.imagen}">
 
         <h3>${producto.nombre}</h3>
 
-        <div class="price">$${producto.precio}</div>
+        <p>$ ${producto.precio}</p>
 
-        <a href="${producto.pdf}" target="_blank" class="card-btn">
-          Ver PDF
+        <a
+        class="card-btn"
+        href="${producto.pdf}"
+        target="_blank"
+        >
+        Ver PDF
         </a>
 
       </div>
-    `;
 
-  });
+      `;
 
+    });
+
+  }catch(err){
+
+    console.log(err);
+
+  }
 }
 
 async function cargarSobreMi(){
 
-  const { data } = await supabaseClient
-  .from('sobre_mi')
-  .select('*')
-  .limit(1)
-  .single();
+  try{
 
-  if(!data) return;
+    const { data,error } = await supabaseClient
+    .from('sobre_mi')
+    .select('*')
+    .limit(1)
+    .single();
 
-  document.getElementById('sobreContainer').innerHTML = `
+    if(error){
 
-    <img src="${data.imagen}" alt="Sobre mí">
+      console.log(error);
+      return;
 
-    <h2>${data.titulo}</h2>
+    }
 
-    <p>${data.texto}</p>
+    document.getElementById('sobreMiContainer').innerHTML = `
 
-  `;
+      <img src="${data.imagen}">
 
+      <p>${data.texto}</p>
+
+    `;
+
+  }catch(err){
+
+    console.log(err);
+
+  }
 }
 
 cargarProductos();
