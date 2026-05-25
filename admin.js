@@ -5,11 +5,13 @@ function login(){
 
   if(user === 'manotas' && pass === 'conejita123*'){
 
-    alert('Login correcto');
+    localStorage.setItem('adminLogged','true');
+
+    window.location.href = 'dashboard.html';
 
   }else{
 
-    alert('Datos incorrectos');
+    alert('Usuario o contraseña incorrectos');
 
   }
 }
