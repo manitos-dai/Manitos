@@ -1,77 +1,63 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Consultorio Psicopedagógico</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manitos</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 
-  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="supabase.js"></script>
 </head>
 <body>
 
-  <div class="navbar">
-    <button class="menu-toggle" id="menuToggle">☰</button>
-  </div>
+<header class="navbar">
+  <button id="menu-toggle">☰</button>
 
-  <div class="side-menu" id="sideMenu">
+  <nav id="menu" class="menu">
     <button onclick="showSection('productos')">📚 Productos</button>
-    <button onclick="showSection('sobreMi')">👩‍⚕️ Sobre mí</button>
-    <button onclick="showSection('sesiones')">📅 Solicitar Sesiones</button>
+    <button onclick="showSection('sobreMi')">👩‍🏫 Sobre mí</button>
+    <button onclick="showSection('sesiones')">📅 Solicitar sesiones</button>
+  </nav>
+</header>
+
+<section id="inicio" class="hero">
+  <img src="https://i.imgur.com/irQKj2p.png" class="hero-img" />
+</section>
+
+<section id="productos" class="hidden section">
+  <h2>📚 Productos Digitales</h2>
+  <div id="productos-container" class="cards"></div>
+</section>
+
+<section id="sobreMi" class="hidden section">
+  <h2>👩‍🏫 Sobre mí</h2>
+
+  <div id="sobre-mi-texto"></div>
+
+  <div id="galeria" class="galeria"></div>
+</section>
+
+<section id="sesiones" class="hidden section">
+  <div class="turnos-box">
+    <h2>📅 Solicitar sesiones</h2>
+
+    <p>📧 consultoriomanitos@gmail.com</p>
+
+    <p>📱 +54 11 0000-0000</p>
+
+    <a
+      class="whatsapp-btn"
+      href="https://wa.me/5491100000000?text=Hola%20😊%20quisiera%20consultar%20por%20sesiones%20psicopedagógicas"
+      target="_blank"
+    >
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" />
+      Contactar por WhatsApp
+    </a>
   </div>
+</section>
 
-  <section class="hero" id="hero"></section>
-
-  <section class="section" id="productos">
-    <h2>Productos Digitales</h2>
-    <div id="productosContainer"></div>
-  </section>
-
-  <section class="section" id="sobreMi">
-    <h2>Sobre mí</h2>
-
-    <div class="about-box" id="sobreMiContainer"></div>
-  </section>
-
-  <section class="section" id="sesiones">
-    <h2>Solicitar Sesiones</h2>
-
-    <div class="sessions-box">
-      <h3>Contacto</h3>
-
-      <div class="sessions-item">
-        📧 consultoriomanitos@gmail.com
-      </div>
-
-      <div class="sessions-item">
-        📱 11 3423-6917
-      </div>
-
-      <a
-        class="sessions-whatsapp"
-        href="https://wa.me/541134236917"
-        target="_blank"
-      >
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
-        WhatsApp
-      </a>
-    </div>
-  </section>
-
-  <a
-    href="https://wa.me/541134236917"
-    class="whatsapp-float"
-    target="_blank"
-  >
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
-  </a>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase.js"></script>
-  <script src="script.js"></script>
-
+<script src="script.js"></script>
 </body>
 </html>
