@@ -1,111 +1,60 @@
-const menuToggle = document.getElementById('menuToggle');
-const sideMenu = document.getElementById('sideMenu');
+const sections = ['productos', 'sobreMi', 'sesiones'];
 
-menuToggle.addEventListener('click',()=>{
+function showSection(id) {
+  document.getElementById('inicio').style.display = 'none';
 
-  sideMenu.classList.toggle('active');
-
-});
-
-function showSection(id){
-
-  document.getElementById('hero').style.display='none';
-
-  const sections = document.querySelectorAll('.section');
-
-  sections.forEach(section=>{
-
-    section.classList.remove('active');
-
+  sections.forEach(section => {
+    document.getElementById(section).classList.add('hidden');
   });
 
-  document.getElementById(id).classList.add('active');
-
-  sideMenu.classList.remove('active');
+  document.getElementById(id).classList.remove('hidden');
 }
 
-async function cargarProductos(){
-
-  try{
-
-    const { data,error } = await supabaseClient
+async function cargarProductos() {
+  const { data } = await supabaseClient
     .from('productos')
     .select('*');
 
-    if(error){
+  const container = document.getElementById('productos-container');
 
-      console.log(error);
-      return;
+  container.innerHTML = '';
 
-    }
-
-    const container = document.getElementById('productosContainer');
-
-    container.innerHTML='';
-
-    data.forEach(producto=>{
-
-      container.innerHTML += `
-
+  data.forEach(producto => {
+    container.innerHTML += `
       <div class="card">
-
-        <img src="${producto.imagen}">
-
+        <img src="${producto.imagen}" />
         <h3>${producto.nombre}</h3>
-
-        <p>$ ${producto.precio}</p>
-
-        <a
-        class="card-btn"
-        href="${producto.pdf}"
-        target="_blank"
-        >
-        Ver PDF
-        </a>
-
+        <p>${producto.descripcion || ''}</p>
+        <strong>${producto.precio}</strong>
+        <br>
+        <a href="${producto.pdf}" target="_blank">📄 Ver PDF</a>
       </div>
-
-      `;
-
-    });
-
-  }catch(err){
-
-    console.log(err);
-
-  }
+    `;
+  });
 }
 
-async function cargarSobreMi(){
-
-  try{
-
-    const { data,error } = await supabaseClient
+async function cargarSobreMi() {
+  const { data } = await supabaseClient
     .from('sobre_mi')
     .select('*')
     .limit(1)
     .single();
 
-    if(error){
+  document.getElementById('sobre-mi-texto').innerHTML = `
+    <p>${data.texto}</p>
+  `;
 
-      console.log(error);
-      return;
+  const galeria = document.getElementById('galeria');
 
-    }
+  const imagenes = data.galeria ? data.galeria.split(',') : [];
 
-    document.getElementById('sobreMiContainer').innerHTML = `
+  galeria.innerHTML = '';
 
-      <img src="${data.imagen}">
-
-      <p>${data.texto}</p>
-
+  imagenes.forEach(img => {
+    galeria.innerHTML += `
+      <img src="${img.trim()}" />
     `;
-
-  }catch(err){
-
-    console.log(err);
-
-  }
+  });
 }
 
 cargarProductos();
