@@ -431,21 +431,25 @@ body {
 
   .landing-screen {
 
-    background-size: 102%;
+    background-size: cover;
 
-    background-position: center center;
+    background-position: center top;
+
+    background-color: #efe7ff;
   }
 
   .main-background {
 
-    background-size: 102%;
+    background-size: cover;
 
-    background-position: center center;
+    background-position: center top;
+
+    background-color: #efe7ff;
   }
 
   #ingresar-btn {
 
-    top: 58%;
+    top: 68%;
 
     left: 50%;
 
