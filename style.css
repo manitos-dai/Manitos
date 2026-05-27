@@ -416,14 +416,14 @@ body {
 
   .landing-screen {
 
-    background-size: cover;
+    background-size: 92%;
 
     background-position: center center;
   }
 
   .main-background {
 
-    background-size: cover;
+    background-size: 92%;
 
     background-position: center center;
   }
