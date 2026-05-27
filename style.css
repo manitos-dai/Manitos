@@ -409,28 +409,32 @@ body {
 }
 
 /* =========================
-   RESPONSIVE
+   RESPONSIVE MOBILE
 ========================= */
 
 @media (max-width: 768px) {
 
   .landing-screen {
 
-    background-size: contain;
+    background-size: cover;
 
     background-position: center center;
   }
 
   .main-background {
 
-    background-size: contain;
+    background-size: cover;
 
     background-position: center center;
   }
 
   #ingresar-btn {
 
-    top: 54%;
+    top: 48%;
+
+    left: 50%;
+
+    transform: translate(-50%, -50%);
 
     font-size: 16px;
 
@@ -438,10 +442,12 @@ body {
   }
 
   .section h2 {
+
     font-size: 26px;
   }
 
   .turnos-box {
+
     padding: 28px 20px;
   }
 
