@@ -1,14 +1,28 @@
 const sections = ['productos', 'sobreMi', 'sesiones'];
 
-const ingresarBtn = document.getElementById('ingresar-btn');
-const landing = document.getElementById('landing');
-const mainSite = document.getElementById('main-site');
-const menuToggle = document.getElementById('menu-toggle');
-const menu = document.getElementById('menu');
+const ingresarBtn =
+document.getElementById('ingresar-btn');
+
+const landing =
+document.getElementById('landing');
+
+const mainSite =
+document.getElementById('main-site');
+
+const menuToggle =
+document.getElementById('menu-toggle');
+
+const menu =
+document.getElementById('menu');
+
+/* =========================
+   INGRESAR
+========================= */
 
 ingresarBtn.addEventListener('click', () => {
 
   landing.style.opacity = '0';
+
   landing.style.transition = '0.6s';
 
   setTimeout(() => {
@@ -17,24 +31,42 @@ ingresarBtn.addEventListener('click', () => {
 
     mainSite.classList.remove('hidden');
 
-    showSection('productos');
-
   }, 600);
 
 });
 
+/* =========================
+   MENU
+========================= */
+
 menuToggle.addEventListener('click', () => {
+
   menu.classList.toggle('hidden-menu');
+
 });
+
+/* =========================
+   SECCIONES
+========================= */
 
 function showSection(id) {
 
   sections.forEach(section => {
-    document.getElementById(section).classList.add('hidden');
+
+    document
+    .getElementById(section)
+    .classList.add('hidden');
+
   });
 
-  document.getElementById(id).classList.remove('hidden');
+  document
+  .getElementById(id)
+  .classList.remove('hidden');
 }
+
+/* =========================
+   PRODUCTOS
+========================= */
 
 async function cargarProductos() {
 
@@ -42,7 +74,8 @@ async function cargarProductos() {
     .from('productos')
     .select('*');
 
-  const container = document.getElementById('productos-container');
+  const container =
+  document.getElementById('productos-container');
 
   container.innerHTML = '';
 
@@ -50,6 +83,7 @@ async function cargarProductos() {
 
     container.innerHTML += `
       <div class="card">
+
         <img src="${producto.imagen}" />
 
         <h3>${producto.nombre}</h3>
@@ -63,11 +97,15 @@ async function cargarProductos() {
         <a href="${producto.pdf}" target="_blank">
           📄 Ver PDF
         </a>
+
       </div>
     `;
-
   });
 }
+
+/* =========================
+   SOBRE MI
+========================= */
 
 async function cargarSobreMi() {
 
@@ -77,15 +115,19 @@ async function cargarSobreMi() {
     .limit(1)
     .single();
 
-  document.getElementById('sobre-mi-texto').innerHTML = `
+  document
+  .getElementById('sobre-mi-texto')
+  .innerHTML = `
     <p>${data.texto}</p>
   `;
 
-  const galeria = document.getElementById('galeria');
+  const galeria =
+  document.getElementById('galeria');
 
   galeria.innerHTML = '';
 
-  const imagenes = data.galeria
+  const imagenes =
+  data.galeria
     ? data.galeria.split(',')
     : [];
 
@@ -94,9 +136,9 @@ async function cargarSobreMi() {
     galeria.innerHTML += `
       <img src="${img.trim()}" />
     `;
-
   });
 }
 
 cargarProductos();
+
 cargarSobreMi();
