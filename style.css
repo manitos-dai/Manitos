@@ -75,7 +75,7 @@ body {
 
   position: absolute;
 
-  top: 52%;
+  top: 46%;
 
   left: 50%;
 
@@ -87,13 +87,15 @@ body {
 
   color: white;
 
-  padding: 16px 38px;
+  padding: 16px 42px;
 
   border-radius: 20px;
 
   font-size: 18px;
 
   font-weight: bold;
+
+  letter-spacing: 1px;
 
   cursor: pointer;
 
@@ -431,9 +433,11 @@ body {
 
   .landing-screen {
 
-    background-size: cover;
+    background-size: contain;
 
-    background-position: center top;
+    background-position: center center;
+
+    background-repeat: no-repeat;
 
     background-color: #efe7ff;
   }
@@ -449,7 +453,7 @@ body {
 
   #ingresar-btn {
 
-    top: 68%;
+    top: 58%;
 
     left: 50%;
 
