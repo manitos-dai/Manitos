@@ -1,144 +1,36 @@
-const sections = ['productos', 'sobreMi', 'sesiones'];
-
-const ingresarBtn =
-document.getElementById('ingresar-btn');
-
-const landing =
-document.getElementById('landing');
-
-const mainSite =
-document.getElementById('main-site');
-
-const menuToggle =
-document.getElementById('menu-toggle');
-
-const menu =
-document.getElementById('menu');
-
-/* =========================
-   INGRESAR
-========================= */
-
-ingresarBtn.addEventListener('click', () => {
-
-  landing.style.opacity = '0';
-
-  landing.style.transition = '0.6s';
-
-  setTimeout(() => {
-
-    landing.style.display = 'none';
-
-    mainSite.classList.remove('hidden');
-
-  }, 600);
-
-});
-
-/* =========================
-   MENU
-========================= */
+const menuToggle = document.getElementById('menu-toggle');
+const mainNav = document.getElementById('main-nav');
 
 menuToggle.addEventListener('click', () => {
-
-  menu.classList.toggle('hidden-menu');
-
+  mainNav.classList.toggle('open');
 });
 
-/* =========================
-   SECCIONES
-========================= */
+const navLinks = document.querySelectorAll('.main-nav a');
 
-function showSection(id) {
-
-  sections.forEach(section => {
-
-    document
-    .getElementById(section)
-    .classList.add('hidden');
-
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    mainNav.classList.remove('open');
   });
+});
 
-  document
-  .getElementById(id)
-  .classList.remove('hidden');
-}
+const animatedElements = document.querySelectorAll(
+  '.section-content, .value-card, .service-card, .material-card, .contact-card'
+);
 
-/* =========================
-   PRODUCTOS
-========================= */
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  },
+  {
+    threshold: 0.15
+  }
+);
 
-async function cargarProductos() {
-
-  const { data } = await supabaseClient
-    .from('productos')
-    .select('*');
-
-  const container =
-  document.getElementById('productos-container');
-
-  container.innerHTML = '';
-
-  data.forEach(producto => {
-
-    container.innerHTML += `
-      <div class="card">
-
-        <img src="${producto.imagen}" />
-
-        <h3>${producto.nombre}</h3>
-
-        <p>${producto.descripcion || ''}</p>
-
-        <strong>${producto.precio}</strong>
-
-        <br>
-
-        <a href="${producto.pdf}" target="_blank">
-          📄 Ver PDF
-        </a>
-
-      </div>
-    `;
-  });
-}
-
-/* =========================
-   SOBRE MI
-========================= */
-
-async function cargarSobreMi() {
-
-  const { data } = await supabaseClient
-    .from('sobre_mi')
-    .select('*')
-    .limit(1)
-    .single();
-
-  document
-  .getElementById('sobre-mi-texto')
-  .innerHTML = `
-    <p>${data.texto}</p>
-  `;
-
-  const galeria =
-  document.getElementById('galeria');
-
-  galeria.innerHTML = '';
-
-  const imagenes =
-  data.galeria
-    ? data.galeria.split(',')
-    : [];
-
-  imagenes.forEach(img => {
-
-    galeria.innerHTML += `
-      <img src="${img.trim()}" />
-    `;
-  });
-}
-
-cargarProductos();
-
-cargarSobreMi();
+animatedElements.forEach(element => {
+  element.classList.add('fade-item');
+  observer.observe(element);
+});
