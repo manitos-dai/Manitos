@@ -8,18 +8,27 @@
 
   <meta
     name="description"
-    content="Manitos es un espacio psicopedagógico en Pilar dedicado al acompañamiento, evaluación y orientación de niños, niñas, adolescentes y familias."
+    content="Manitos es un consultorio psicopedagógico en Pilar dedicado al acompañamiento, evaluación y orientación de niños, niñas, adolescentes y familias."
   />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-  <header class="site-header">
+  <header class="site-header" id="site-header">
     <a href="#inicio" class="brand">
-      <span class="brand-hands">🖐️</span>
-      <span class="brand-name">Manitos</span>
+      <span class="brand-hands">🖐️🖐️🖐️</span>
+      <span class="logo-text small-logo">
+        <span class="blue">M</span><span class="pink">a</span><span class="green">n</span><span class="purple">i</span><span class="orange">t</span><span class="yellow">o</span><span class="orange">s</span>
+      </span>
     </a>
 
     <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
@@ -28,11 +37,10 @@
 
     <nav class="main-nav" id="main-nav">
       <a href="#inicio">Inicio</a>
-      <a href="#sobre-nosotros">Sobre nosotros</a>
+      <a href="#que-es-manitos">Sobre nosotros</a>
       <a href="#servicios">Servicios</a>
       <a href="#familias">Para familias</a>
       <a href="#contacto">Contacto</a>
-      <a href="#ingresar" class="nav-login">♡ Ingresar</a>
     </nav>
   </header>
 
@@ -47,12 +55,18 @@
       <div class="hero-content">
         <div class="heart-icon">♡</div>
 
-        <h1 class="hero-title">Manitos</h1>
+        <h1 class="logo-text hero-logo">
+          <span class="blue">M</span><span class="pink">a</span><span class="green">n</span><span class="purple">i</span><span class="orange">t</span><span class="yellow">o</span><span class="orange">s</span>
+        </h1>
 
         <h2 class="hero-subtitle">
           Acompañamos, <span>cuidamos</span>,<br />
           <strong>crecemos juntos.</strong>
         </h2>
+
+        <p class="hero-phrase">
+          Cada aprendizaje comienza con una mano que acompaña.
+        </p>
 
         <div class="hero-line"></div>
 
@@ -61,11 +75,21 @@
           niñas y adolescentes.
         </p>
 
-        <a href="#sobre-nosotros" class="primary-button">
-          ♡ INGRESAR
-        </a>
+        <div class="hero-actions">
+          <a
+            href="https://wa.me/5491134236917?text=Hola%20Manitos%2C%20quisiera%20realizar%20una%20consulta%20con%20la%20profesional."
+            target="_blank"
+            class="primary-button"
+          >
+            Solicitar turno
+          </a>
 
-        <a href="#sobre-nosotros" class="scroll-link">
+          <a href="#servicios" class="secondary-button">
+            Ver servicios
+          </a>
+        </div>
+
+        <a href="#que-es-manitos" class="scroll-link">
           ↓<br />
           Descubrí más
         </a>
@@ -74,12 +98,12 @@
       <div class="hero-waves"></div>
     </section>
 
-    <section id="sobre-nosotros" class="section about-section">
+    <section id="que-es-manitos" class="section about-section">
       <div class="section-content two-columns">
         <div>
           <p class="section-label">Sobre nosotros</p>
 
-          <h2>¿Quiénes somos?</h2>
+          <h2>¿Qué es Manitos?</h2>
 
           <p>
             Manitos es un consultorio psicopedagógico pensado para acompañar
@@ -92,6 +116,21 @@
             respetando los tiempos de cada niño y brindando herramientas
             concretas a las familias para acompañar cada proceso.
           </p>
+
+          <div class="professional-card">
+            <div class="professional-photo">
+              Foto profesional
+            </div>
+
+            <div>
+              <h3>Lic. Daiana Carberol</h3>
+              <strong>Psicopedagoga</strong>
+              <p>
+                Acompaña procesos de aprendizaje desde una mirada respetuosa,
+                cercana y comprometida con cada niño, niña, adolescente y familia.
+              </p>
+            </div>
+          </div>
 
           <div class="values-grid">
             <article class="value-card">
@@ -126,7 +165,7 @@
       <div class="section-content">
         <p class="section-label">Servicios</p>
 
-        <h2>¿Qué ofrece Manitos?</h2>
+        <h2>¿Qué ofrece el consultorio?</h2>
 
         <div class="cards-grid">
           <article class="service-card">
@@ -232,39 +271,48 @@
         <h2>Comunicate con Manitos</h2>
 
         <div class="contact-grid">
-          <div class="contact-card">
+          <a
+            class="contact-card whatsapp"
+            href="https://wa.me/5491134236917?text=Hola%20Manitos%2C%20quisiera%20realizar%20una%20consulta%20con%20la%20profesional."
+            target="_blank"
+          >
+            <div class="contact-icon">🟢</div>
             <h3>WhatsApp</h3>
             <p>11 3423-6917</p>
-            <a
-              class="primary-button small"
-              href="https://wa.me/5491134236917?text=Hola%20Manitos%2C%20quisiera%20realizar%20una%20consulta%20con%20el%20profesional."
-              target="_blank"
-            >
-              Consultar por WhatsApp
-            </a>
-          </div>
+            <span>Enviar mensaje</span>
+          </a>
 
-          <div class="contact-card">
+          <a
+            class="contact-card instagram"
+            href="https://www.instagram.com/manitos.pilar/"
+            target="_blank"
+          >
+            <div class="contact-icon">📷</div>
             <h3>Instagram</h3>
             <p>@manitos.pilar</p>
-            <a
-              class="secondary-button link-button"
-              href="https://www.instagram.com/manitos.pilar/"
-              target="_blank"
-            >
-              Abrir Instagram
-            </a>
-          </div>
+            <span>Ver perfil</span>
+          </a>
 
-          <div class="contact-card">
+          <a
+            class="contact-card gmail"
+            href="mailto:consultoriomanitos@gmail.com"
+          >
+            <div class="contact-icon">✉️</div>
             <h3>Email</h3>
             <p>consultoriomanitos@gmail.com</p>
-          </div>
+            <span>Enviar correo</span>
+          </a>
 
-          <div class="contact-card">
-            <h3>Dirección</h3>
-            <p>📍 Pilar Point - Centro Comercial, Pilar Centro.</p>
-          </div>
+          <a
+            class="contact-card maps"
+            href="https://www.google.com/maps/search/?api=1&query=Pilar%20Point%20Centro%20Comercial%20Pilar%20Centro"
+            target="_blank"
+          >
+            <div class="contact-icon">📍</div>
+            <h3>Consultorio</h3>
+            <p>Pilar Point - Centro Comercial, Pilar Centro.</p>
+            <span>Cómo llegar</span>
+          </a>
         </div>
       </div>
     </section>
@@ -272,8 +320,11 @@
   </main>
 
   <footer class="site-footer">
-    <div>
-      <strong>Manitos</strong>
+    <div class="footer-brand">
+      <span class="brand-hands">🖐️🖐️🖐️</span>
+      <span class="logo-text small-logo">
+        <span class="blue">M</span><span class="pink">a</span><span class="green">n</span><span class="purple">i</span><span class="orange">t</span><span class="yellow">o</span><span class="orange">s</span>
+      </span>
       <p>Consultorio psicopedagógico.</p>
     </div>
 
