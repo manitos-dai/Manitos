@@ -1,36 +1,168 @@
-const menuToggle = document.getElementById('menu-toggle');
-const mainNav = document.getElementById('main-nav');
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manitos | Consultorio Psicopedagógico</title>
+  <meta name="description" content="Manitos es un consultorio psicopedagógico en Pilar dedicado al acompañamiento, evaluación y orientación de niños, niñas, adolescentes y familias." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
 
-menuToggle.addEventListener('click', () => {
-  mainNav.classList.toggle('open');
-});
+<header class="site-header" id="site-header">
+  <a href="#inicio" class="brand" aria-label="Ir al inicio">
+    <span class="brand-hands" aria-hidden="true">
+      <img src="assets/hand-blue.svg" alt="">
+      <img src="assets/hand-yellow.svg" alt="">
+      <img src="assets/hand-purple.svg" alt="">
+    </span>
+    <span class="logo-text small-logo" aria-label="Manitos">
+      <span class="blue">M</span><span class="pink">a</span><span class="green">n</span><span class="purple">i</span><span class="orange">t</span><span class="yellow">o</span><span class="orange">s</span>
+    </span>
+  </a>
 
-const navLinks = document.querySelectorAll('.main-nav a');
+  <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
 
-navLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    mainNav.classList.remove('open');
-  });
-});
+  <nav class="main-nav" id="main-nav">
+    <a href="#inicio">Inicio</a>
+    <a href="#que-es-manitos">Sobre nosotros</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#familias">Para familias</a>
+    <a href="#materiales">Material digital</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
 
-const animatedElements = document.querySelectorAll(
-  '.section-content, .value-card, .service-card, .material-card, .contact-card'
-);
+<main>
+  <section id="inicio" class="hero-section">
+    <img class="decor-hand hand-yellow" src="assets/hand-yellow.svg" alt="">
+    <img class="decor-hand hand-purple" src="assets/hand-purple.svg" alt="">
+    <img class="decor-hand hand-green" src="assets/hand-green.svg" alt="">
+    <img class="decor-hand hand-pink" src="assets/hand-pink.svg" alt="">
+    <img class="decor-hand hand-blue" src="assets/hand-blue.svg" alt="">
 
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  },
-  {
-    threshold: 0.15
-  }
-);
+    <div class="hero-content">
+      <div class="heart-icon">♡</div>
+      <h1 class="logo-text hero-logo" aria-label="Manitos">
+        <span class="blue">M</span><span class="pink">a</span><span class="green">n</span><span class="purple">i</span><span class="orange">t</span><span class="yellow">o</span><span class="orange">s</span>
+      </h1>
+      <h2 class="hero-subtitle">Acompañamos, <span>cuidamos</span>,<br><strong>crecemos juntos.</strong></h2>
+      <p class="hero-phrase">Cada aprendizaje comienza con una mano que acompaña.</p>
+      <div class="hero-line"></div>
+      <p class="hero-text">Un espacio terapéutico para el desarrollo y bienestar de niños, niñas y adolescentes.</p>
+      <div class="hero-actions">
+        <a class="primary-button" href="https://wa.me/5491134236917?text=Hola%20Manitos%2C%20quisiera%20realizar%20una%20consulta%20con%20la%20profesional." target="_blank">Solicitar turno</a>
+        <a class="secondary-button" href="#servicios">Ver servicios</a>
+      </div>
+      <a href="#que-es-manitos" class="scroll-link"><span>↓</span>Descubrí más</a>
+    </div>
 
-animatedElements.forEach(element => {
-  element.classList.add('fade-item');
-  observer.observe(element);
-});
+    <div class="hero-waves"></div>
+  </section>
+
+  <section id="que-es-manitos" class="section about-section">
+    <div class="section-content two-columns">
+      <div>
+        <p class="section-label">Sobre nosotros</p>
+        <h2>¿Qué es Manitos?</h2>
+        <p>Manitos es un consultorio psicopedagógico pensado para acompañar el desarrollo, el aprendizaje y el bienestar de niños, niñas, adolescentes y sus familias.</p>
+        <p>Trabajamos desde una mirada integral, cálida y profesional, respetando los tiempos de cada niño y brindando herramientas concretas a las familias para acompañar cada proceso.</p>
+
+        <div class="professional-card">
+          <div class="professional-photo"><span>Foto profesional</span></div>
+          <div>
+            <h3>Lic. Daiana Carberol</h3>
+            <strong>Psicopedagoga</strong>
+            <p>Acompaña procesos de aprendizaje desde una mirada respetuosa, cercana y comprometida con cada niño, niña, adolescente y familia.</p>
+          </div>
+        </div>
+
+        <div class="values-grid">
+          <article class="value-card"><div class="value-icon heart">♡</div><h3>Calidez</h3><p>Tratamos a cada niño con amor, respeto y escucha.</p></article>
+          <article class="value-card"><div class="value-icon people">🤝</div><h3>Acompañamiento</h3><p>Caminamos junto a cada familia durante el proceso.</p></article>
+          <article class="value-card"><div class="value-icon star">⭐</div><h3>Profesionalismo</h3><p>Formación constante y enfoque integral.</p></article>
+        </div>
+      </div>
+
+      <div class="image-card">
+        <div class="placeholder-image"><span>Imagen del consultorio</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicios" class="section services-section">
+    <div class="section-content">
+      <p class="section-label">Servicios</p>
+      <h2>¿Qué ofrece el consultorio?</h2>
+      <div class="cards-grid">
+        <article class="service-card"><div class="service-icon">📅</div><h3>Solicitar turnos</h3><p>Consultas para iniciar un proceso de acompañamiento psicopedagógico.</p></article>
+        <article class="service-card"><div class="service-icon">🧠</div><h3>Pruebas cognitivas</h3><p>Evaluaciones y herramientas para conocer mejor las necesidades del paciente.</p></article>
+        <article class="service-card"><div class="service-icon">📚</div><h3>Material PDF</h3><p>Manuales y recursos digitales pensados para familias, docentes y profesionales.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="familias" class="section families-section">
+    <div class="section-content two-columns">
+      <div>
+        <p class="section-label">Para familias</p>
+        <h2>Un espacio para acompañar desde casa</h2>
+        <p>Esta sección estará pensada para brindar orientación, recursos y recomendaciones a madres, padres y tutores.</p>
+        <ul class="soft-list">
+          <li>Consejos para acompañar el aprendizaje.</li>
+          <li>Preguntas frecuentes sobre el proceso psicopedagógico.</li>
+          <li>Recursos y materiales de apoyo.</li>
+          <li>Recomendaciones para organizar rutinas.</li>
+        </ul>
+      </div>
+      <div class="family-box">
+        <h3>Próximamente</h3>
+        <p>Portal privado para Padre / Madre / Tutor con calendario, seguimiento y evolución del paciente.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="materiales" class="section materials-section">
+    <div class="section-content">
+      <p class="section-label">Material digital</p>
+      <h2>Manuales y recursos PDF</h2>
+      <p class="section-intro">Próximamente vas a encontrar materiales descargables para acompañar el aprendizaje y el desarrollo.</p>
+      <div class="cards-grid">
+        <article class="material-card"><div class="pdf-preview">PDF</div><h3>Material de estimulación</h3><p>Recursos prácticos para trabajar en casa o en el aula.</p><button class="secondary-button">Consultar</button></article>
+        <article class="material-card"><div class="pdf-preview">PDF</div><h3>Guías para familias</h3><p>Orientaciones simples para acompañar procesos de aprendizaje.</p><button class="secondary-button">Consultar</button></article>
+        <article class="material-card"><div class="pdf-preview">PDF</div><h3>Actividades imprimibles</h3><p>Propuestas listas para utilizar con niños y niñas.</p><button class="secondary-button">Consultar</button></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="section contact-section">
+    <div class="section-content">
+      <p class="section-label">Contacto</p>
+      <h2>Comunicate con Manitos</h2>
+      <div class="contact-grid">
+        <a class="contact-card whatsapp" href="https://wa.me/5491134236917?text=Hola%20Manitos%2C%20quisiera%20realizar%20una%20consulta%20con%20la%20profesional." target="_blank"><div class="contact-icon">☎</div><h3>WhatsApp</h3><p>11 3423-6917</p><span>Enviar mensaje</span></a>
+        <a class="contact-card instagram" href="https://www.instagram.com/manitos.pilar/" target="_blank"><div class="contact-icon">◎</div><h3>Instagram</h3><p>@manitos.pilar</p><span>Ver perfil</span></a>
+        <a class="contact-card gmail" href="mailto:consultoriomanitos@gmail.com"><div class="contact-icon">@</div><h3>Email</h3><p>consultoriomanitos@gmail.com</p><span>Enviar correo</span></a>
+        <a class="contact-card maps" href="https://www.google.com/maps/search/?api=1&query=Pilar%20Point%20Centro%20Comercial%20Pilar%20Centro" target="_blank"><div class="contact-icon">⌖</div><h3>Consultorio</h3><p>Pilar Point - Centro Comercial, Pilar Centro.</p><span>Cómo llegar</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-brand">
+    <span class="brand-hands" aria-hidden="true"><img src="assets/hand-blue.svg" alt=""><img src="assets/hand-yellow.svg" alt=""><img src="assets/hand-purple.svg" alt=""></span>
+    <span class="logo-text small-logo" aria-label="Manitos"><span class="blue">M</span><span class="pink">a</span><span class="green">n</span><span class="purple">i</span><span class="orange">t</span><span class="yellow">o</span><span class="orange">s</span></span>
+    <p>Consultorio psicopedagógico.</p>
+  </div>
+  <p>© 2026 Manitos. Todos los derechos reservados.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
